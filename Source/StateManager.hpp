@@ -7,17 +7,19 @@
 
 #include "State.hpp"
 
-class StateManager
+class Application;
+
+class StateManager : public sf::Drawable
 {
     public:
-		StateManager();
+		StateManager(Application& app);
 
 		template<typename T>
 		void registerState(std::string const& id);
 
 		void handleEvent(sf::Event const& event);
 		void update(sf::Time dt);
-		void render();
+		void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 		void pushState(std::string const& id);
 		void popState();
@@ -30,25 +32,7 @@ class StateManager
 
 		void applyPendingChanges();
 
-		void setData(std::string const& id, std::string const& data);
-		void setData(std::string const& id, bool const& data);
-		void setData(std::string const& id, int const& data);
-		void setData(std::string const& id, float const& data);
-		void setData(std::string const& id, sf::FloatRect const& data);
-		void setData(std::string const& id, sf::IntRect const& data);
-		void setData(std::string const& id, sf::Vector2f const& data);
-		void setData(std::string const& id, sf::Vector2i const& data);
-		void setData(std::string const& id, sf::Color const& data);
-
-        std::string getStringData(std::string const& id);
-        bool getBoolData(std::string const& id);
-        int getIntData(std::string const& id);
-        float getFloatData(std::string const& id);
-        sf::FloatRect getFloatRectData(std::string const& id);
-        sf::IntRect getIntRectData(std::string const& id);
-        sf::Vector2f getVectorFloatData(std::string const& id);
-        sf::Vector2i getVectorIntData(std::string const& id);
-        sf::Color getColorData(std::string const& id);
+		Application& getApplication();
 
 	private:
 		enum Action
@@ -66,6 +50,8 @@ class StateManager
 		};
 
 	private:
+        Application& mApplication;
+
 		State::Ptr createState(std::string const& id);
 
 		std::string mLastActiveStateType;
@@ -74,17 +60,6 @@ class StateManager
 		std::vector<PendingChange> mPendingList;
 
 		std::map<std::string, std::function<State::Ptr()>> mFactories;
-
-        // Data
-		std::map<std::string,std::string> mStringData;
-		std::map<std::string,bool> mBoolData;
-		std::map<std::string,int> mIntData;
-		std::map<std::string,float> mFloatData;
-		std::map<std::string,sf::FloatRect> mFloatRectData;
-		std::map<std::string,sf::IntRect> mIntRectData;
-		std::map<std::string,sf::Vector2f> mVectorFloatData;
-		std::map<std::string,sf::Vector2i> mVectorIntData;
-		std::map<std::string,sf::Color> mColorData;
 };
 
 template<typename T>

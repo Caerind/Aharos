@@ -77,7 +77,7 @@ void Statistics::update()
         {
             itr->second.setFont(*mFont);
             itr->second.setCharacterSize(mCharSize);
-            itr->second.setPosition(sf::Vector2f(pos,5.f));
+            itr->second.setPosition(sf::Vector2f(5.f,pos));
             pos += itr->second.getGlobalBounds().height + 5;
         }
     }

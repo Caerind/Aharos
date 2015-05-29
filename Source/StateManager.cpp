@@ -1,8 +1,10 @@
 #include "StateManager.hpp"
+#include "State.hpp"
+#include "Application.hpp"
 
 #include <cassert>
 
-StateManager::StateManager()
+StateManager::StateManager(Application& app) : mApplication(app)
 {
 }
 
@@ -32,11 +34,11 @@ void StateManager::update(sf::Time dt)
     applyPendingChanges();
 }
 
-void StateManager::render()
+void StateManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	for(auto itr = mStates.begin(); itr != mStates.end(); itr++)
 	{
-        (*itr)->render();
+        target.draw(*(*itr));
 	}
 }
 
@@ -120,92 +122,7 @@ void StateManager::applyPendingChanges()
 	mPendingList.clear();
 }
 
-void StateManager::setData(std::string const& id, std::string const& data)
+Application& StateManager::getApplication()
 {
-    mStringData[id] = data;
-}
-
-void StateManager::setData(std::string const& id, bool const& data)
-{
-    mBoolData[id] = data;
-}
-
-void StateManager::setData(std::string const& id, int const& data)
-{
-    mIntData[id] = data;
-}
-
-void StateManager::setData(std::string const& id, float const& data)
-{
-    mFloatData[id] = data;
-}
-
-void StateManager::setData(std::string const& id, sf::FloatRect const& data)
-{
-    mFloatRectData[id] = data;
-}
-
-void StateManager::setData(std::string const& id, sf::IntRect const& data)
-{
-    mIntRectData[id] = data;
-}
-
-void StateManager::setData(std::string const& id, sf::Vector2f const& data)
-{
-    mVectorFloatData[id] = data;
-}
-
-void StateManager::setData(std::string const& id, sf::Vector2i const& data)
-{
-    mVectorIntData[id] = data;
-}
-
-void StateManager::setData(std::string const& id, sf::Color const& data)
-{
-    mColorData[id] = data;
-}
-
-std::string StateManager::getStringData(std::string const& id)
-{
-    return mStringData[id];
-}
-
-bool StateManager::getBoolData(std::string const& id)
-{
-    return mBoolData[id];
-}
-
-int StateManager::getIntData(std::string const& id)
-{
-    return mIntData[id];
-}
-
-float StateManager::getFloatData(std::string const& id)
-{
-    return mFloatData[id];
-}
-
-sf::FloatRect StateManager::getFloatRectData(std::string const& id)
-{
-    return mFloatRectData[id];
-}
-
-sf::IntRect StateManager::getIntRectData(std::string const& id)
-{
-    return mIntRectData[id];
-}
-
-sf::Vector2f StateManager::getVectorFloatData(std::string const& id)
-{
-    return mVectorFloatData[id];
-}
-
-sf::Vector2i StateManager::getVectorIntData(std::string const& id)
-{
-    return mVectorIntData[id];
-}
-
-sf::Color StateManager::getColorData(std::string const& id)
-{
-    return mColorData[id];
+    return mApplication;
 }

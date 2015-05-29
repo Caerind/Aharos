@@ -1,5 +1,6 @@
 #include "State.hpp"
 #include "StateManager.hpp"
+#include "Application.hpp"
 
 std::string State::getID()
 {
@@ -26,7 +27,7 @@ bool State::update(sf::Time dt)
     return true;
 }
 
-void State::render()
+void State::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 }
 
@@ -48,6 +49,11 @@ void State::requestClear()
 std::string State::getType() const
 {
     return mType;
+}
+
+Application& State::getApplication()
+{
+    return mManager.getApplication();
 }
 
 bool State::isActiveState() const

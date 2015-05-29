@@ -38,7 +38,7 @@ void Window::setSize(sf::Vector2i size)
 {
     if (instance() != nullptr)
     {
-        instance()->setSize(size);
+        instance()->mWindow.setSize(static_cast<sf::Vector2u>(size));
     }
 }
 
@@ -46,7 +46,7 @@ sf::Vector2i Window::getSize()
 {
     if (instance() != nullptr)
     {
-        return instance()->getSize();
+        return static_cast<sf::Vector2i>(instance()->mWindow.getSize());
     }
     return sf::Vector2i(0,0);
 }

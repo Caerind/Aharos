@@ -6,11 +6,12 @@
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Event.hpp>
 
-#include "../Source/Window.hpp"
+#include "Window.hpp"
 
+class Application;
 class StateManager;
 
-class State
+class State : public sf::Drawable, public sf::Transformable
 {
     public:
         static std::string getID();
@@ -23,10 +24,12 @@ class State
 
         virtual bool handleEvent(sf::Event const& event);
         virtual bool update(sf::Time dt);
-        virtual void render();
+        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
         std::string getType() const;
         bool isActiveState() const;
+
+        Application& getApplication();
 
     protected:
         void requestPush(std::string const& id);

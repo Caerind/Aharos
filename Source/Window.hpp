@@ -7,7 +7,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
 
-#include "../Source/ResourceHolder.hpp"
+#include "ResourceHolder.hpp"
 
 class Window
 {
