@@ -1,6 +1,8 @@
 #ifndef EXAMPLESTATE_HPP
 #define EXAMPLESTATE_HPP
 
+#include <SFML/Graphics/Sprite.hpp>
+
 #include "../Source/State.hpp"
 
 class ExampleState : public State
@@ -12,7 +14,6 @@ class ExampleState : public State
 
         typedef std::unique_ptr<ExampleState> Ptr;
 
-        bool handleEvent(sf::Event const& event);
         bool update(sf::Time dt);
         void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

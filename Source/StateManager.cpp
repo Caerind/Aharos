@@ -14,16 +14,6 @@ StateManager::PendingChange::PendingChange(Action action, std::string const& id)
 {
 }
 
-void StateManager::handleEvent(sf::Event const& event)
-{
-	for(auto itr = mStates.rbegin(); itr != mStates.rend(); itr++)
-	{
-		if(!(*itr)->handleEvent(event))
-			break;
-	}
-    applyPendingChanges();
-}
-
 void StateManager::update(sf::Time dt)
 {
 	for(auto itr = mStates.rbegin(); itr != mStates.rend(); itr++)

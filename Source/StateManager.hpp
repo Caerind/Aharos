@@ -17,7 +17,6 @@ class StateManager : public sf::Drawable
 		template<typename T>
 		void registerState(std::string const& id);
 
-		void handleEvent(sf::Event const& event);
 		void update(sf::Time dt);
 		void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

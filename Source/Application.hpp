@@ -7,6 +7,8 @@
 #include <SFML/System/Time.hpp>
 #include <SFML/System/Clock.hpp>
 
+#include <Thor/Input.hpp>
+
 #include "DataManager.hpp"
 #include "DebugScreen.hpp"
 #include "FileLogger.hpp"
@@ -23,7 +25,19 @@ class Application : public FileLogger, public ResourceHolder, public Window, pub
     public:
         Application();
 
+        typedef thor::ActionMap<std::string> ActionMap;
+        typedef thor::ActionMap<std::string>::CallbackSystem CallbackSystem;
+
         void run();
+
+        ActionMap& getActionMap();
+        CallbackSystem& getCallbackSystem();
+
+        void setAction(std::string const& id, thor::Action action);
+        bool isActionActive(std::string const& id);
+
+        //TODO
+        //void connect(...);
 
     protected:
         template <typename T>
@@ -38,6 +52,9 @@ class Application : public FileLogger, public ResourceHolder, public Window, pub
 
     private:
         StateManager mStates;
+
+        ActionMap mActionMap;
+        CallbackSystem mCallbackSystem;
 
         sf::Time mFpsTimer;
         unsigned int mFpsFrames;

@@ -30,6 +30,26 @@ void Application::run()
 	}
 }
 
+Application::ActionMap& Application::getActionMap()
+{
+    return mActionMap;
+}
+
+Application::CallbackSystem& Application::getCallbackSystem()
+{
+    return mCallbackSystem;
+}
+
+void Application::setAction(std::string const& id, thor::Action action)
+{
+    mActionMap[id] = action;
+}
+
+bool Application::isActionActive(std::string const& id)
+{
+    return mActionMap.isActive(id);
+}
+
 void Application::pushState(std::string const& stateId)
 {
     mStates.pushState(stateId);
@@ -37,15 +57,7 @@ void Application::pushState(std::string const& stateId)
 
 void Application::handleEvents()
 {
-    sf::Event event;
-    while (pollEvent(event))
-    {
-        mStates.handleEvent(event);
-        if (event.type == sf::Event::Closed)
-        {
-            close();
-        }
-    }
+    mActionMap.update(*this);
 }
 
 void Application::update(sf::Time dt)

@@ -17,11 +17,6 @@ State::~State()
 {
 }
 
-bool State::handleEvent(sf::Event const& event)
-{
-    return true;
-}
-
 bool State::update(sf::Time dt)
 {
     return true;

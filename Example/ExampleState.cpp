@@ -12,11 +12,6 @@ std::string ExampleState::getID()
     return "ExampleState";
 }
 
-bool ExampleState::handleEvent(sf::Event const& event)
-{
-    return true;
-}
-
 bool ExampleState::update(sf::Time dt)
 {
     return true;
