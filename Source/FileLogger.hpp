@@ -11,7 +11,10 @@
 class FileLogger
 {
     public:
-        FileLogger(std::string const& filename);
+        FileLogger();
+
+        bool openLog(std::string const& filename);
+        bool isLogOpen();
 
         enum LogType
         {

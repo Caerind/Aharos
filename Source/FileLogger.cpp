@@ -1,11 +1,18 @@
 #include "FileLogger.hpp"
 
-FileLogger::FileLogger(std::string const& filename) : mFile(), mConsole(false), mTimeFormat("[%x][%X]"), mType(FileLogger::LogType::Info)
+FileLogger::FileLogger() : mFile(), mConsole(false), mTimeFormat("[%x][%X]"), mType(FileLogger::LogType::Info)
+{
+}
+
+bool FileLogger::openLog(std::string const& filename)
 {
     mFile.open(filename,std::ios::app);
-    #ifdef AH_DEBUG
-    mConsole = true;
-    #endif // AH_DEBUG
+    return mFile.is_open();
+}
+
+bool FileLogger::isLogOpen()
+{
+    return mFile.is_open();
 }
 
 void FileLogger::useConsole(bool use)

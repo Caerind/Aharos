@@ -6,27 +6,24 @@
 
 #include <SFML/Audio/Music.hpp>
 
+#include <Thor/Math/Random.hpp>
+
 class MusicManager
 {
     public:
-        static MusicManager* instance();
-
-        static std::shared_ptr<sf::Music> playLoop(std::string const& filename);
-        static std::shared_ptr<sf::Music> playList();
-
-        static std::vector<std::string>* getPlaylist();
-
-        static void update();
-
-    private:
         MusicManager();
         ~MusicManager();
 
-        static MusicManager gInstance;
-        static bool gInitialised;
+        std::shared_ptr<sf::Music> playLoop(std::string const& filename);
+        std::shared_ptr<sf::Music> playList();
 
+        std::vector<std::string>& getPlaylist();
+
+    protected:
+        void updateMusicManager();
+
+    private:
         std::shared_ptr<sf::Music> mMusic;
-        bool mListMode;
         std::vector<std::string> mFilenames;
 };
 

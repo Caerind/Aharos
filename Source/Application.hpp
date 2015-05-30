@@ -10,25 +10,31 @@
 #include "DataManager.hpp"
 #include "DebugScreen.hpp"
 #include "FileLogger.hpp"
+#include "Lang.hpp"
+#include "MusicManager.hpp"
 #include "ResourceHolder.hpp"
+#include "SoundManager.hpp"
 #include "StateManager.hpp"
 #include "String.hpp"
 #include "Window.hpp"
 
-class Application : public FileLogger, public ResourceHolder, public Window, public DebugScreen, public DataManager
+class Application : public FileLogger, public ResourceHolder, public Window, public DebugScreen, public DataManager, public Lang, public MusicManager, public SoundManager
 {
     public:
         Application();
 
-        void run(std::string const& stateId);
+        void run();
+
+    protected:
+        template <typename T>
+        void registerState(std::string const& stateId);
+
+        void pushState(std::string const& stateId);
 
     private:
         void handleEvents();
         void update(sf::Time dt);
         void render();
-
-        template <typename T>
-        void registerState(std::string const& stateId);
 
     private:
         StateManager mStates;

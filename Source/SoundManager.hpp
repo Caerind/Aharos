@@ -8,25 +8,22 @@
 #include <SFML/Audio/Sound.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
 
-#include "ResourceHolder.hpp"
+#include <Thor/Resources.hpp>
 
 class SoundManager
 {
     public:
-        static SoundManager* instance();
-
-        static std::shared_ptr<sf::Sound> prepare(std::string const& filename);
-        static bool play(std::string const& filename);
-
-        static void update();
-
-    private:
         SoundManager();
         ~SoundManager();
 
-        static SoundManager gInstance;
-        static bool gInitialised;
+        std::shared_ptr<sf::Sound> prepareSound(std::string const& filename);
+        bool playSound(std::string const& filename);
 
+    private:
+        void updateSoundManager();
+
+    private:
+        thor::ResourceHolder<sf::SoundBuffer,std::string,thor::Resources::RefCounted> mSoundBuffers;
         std::vector<std::shared_ptr<sf::Sound>> mSounds;
 };
 

@@ -1,13 +1,11 @@
 #include "Application.hpp"
 
-Application::Application() : FileLogger("sys.log"), ResourceHolder(), Window(), DebugScreen(), mStates(*this), mFpsFrames(0)
+Application::Application() : FileLogger(), mStates(*this), mFpsFrames(0)
 {
 }
 
-void Application::run(std::string const& stateId)
+void Application::run()
 {
-    mStates.pushState(stateId);
-
     sf::Clock clock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
     const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
@@ -30,6 +28,11 @@ void Application::run(std::string const& stateId)
 
 		render();
 	}
+}
+
+void Application::pushState(std::string const& stateId)
+{
+    mStates.pushState(stateId);
 }
 
 void Application::handleEvents()

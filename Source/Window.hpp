@@ -2,10 +2,10 @@
 #define WINDOW_HPP
 
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Window/Window.hpp>
-#include <SFML/Window/Mouse.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include <SFML/Window/Mouse.hpp>
+#include <SFML/Window/Window.hpp>
 
 class Window : public sf::RenderWindow
 {
@@ -15,6 +15,7 @@ class Window : public sf::RenderWindow
         //
         // Window Part
         //
+    public:
         void create(sf::VideoMode videoMode, std::string title, sf::Uint32 style = sf::Style::Default);
 
         void setSize(sf::Vector2i size);
@@ -39,11 +40,13 @@ class Window : public sf::RenderWindow
         //
         // Icon
         //
+    protected:
         void setIcon(std::string const& filename);
 
         //
         // Mouse
         //
+    public:
         void setMousePosition2i(sf::Vector2i pos);
         void setMousePosition(sf::Vector2f pos);
         void setMousePositionMap(sf::Vector2f pos);
@@ -56,6 +59,7 @@ class Window : public sf::RenderWindow
         //
         // Cursor
         //
+    public:
         enum MouseCursor
         {
             Default,

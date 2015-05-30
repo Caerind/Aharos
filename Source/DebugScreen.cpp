@@ -11,6 +11,7 @@ void DebugScreen::setDebugInfo(std::string const& id, std::string const& value)
         sf::Text t;
         t.setColor(sf::Color::White);
         mValues[id] = t;
+        update();
     }
     mValues[id].setString(id + " : " + value);
 }
@@ -59,7 +60,7 @@ void DebugScreen::update()
 
 void DebugScreen::render(sf::RenderTarget& target) const
 {
-    if (mFont != nullptr && mShowDebugScreen)
+    if (mShowDebugScreen)
     {
         target.setView(target.getDefaultView());
         for (auto itr = mValues.begin(); itr != mValues.end(); itr++)
