@@ -1,41 +1,17 @@
 #include "ResourceHolder.hpp"
 
-ResourceHolder ResourceHolder::gInstance;
-bool ResourceHolder::gInitialised;
-
-ResourceHolder* ResourceHolder::instance()
+sf::Font& ResourceHolder::getFont(std::string const& filename)
 {
-    return gInitialised ? &gInstance : nullptr;
+    return mFonts.acquire(filename,thor::Resources::fromFile<sf::Font>(filename),thor::Resources::Reuse);
 }
 
-ResourceHolder::ResourceHolder()
+sf::Image& ResourceHolder::getImage(std::string const& filename)
 {
-    gInitialised = true;
+    return mImages.acquire(filename,thor::Resources::fromFile<sf::Image>(filename),thor::Resources::Reuse);
 }
 
-ResourceHolder::~ResourceHolder()
+sf::Texture& ResourceHolder::getTexture(std::string const& filename)
 {
-    gInitialised = false;
+    return mTextures.acquire(filename,thor::Resources::fromFile<sf::Texture>(filename),thor::Resources::Reuse);
 }
 
-void ResourceHolder::setLoadingFailureStrategy(ResourceHolder::LoadingFailureStrategy strategy)
-{
-    if (instance() != nullptr)
-    {
-        if (strategy == ResourceHolder::ThrowException)
-            instance()->mResources.setLoadingFailureStrategy(thor::Resources::ThrowException);
-        if (strategy == ResourceHolder::ReturnNullPointer)
-            instance()->mResources.setLoadingFailureStrategy(thor::Resources::ReturnNullPointer);
-    }
-}
-
-void ResourceHolder::setReleaseStrategy(ResourceHolder::ReleaseStrategy strategy)
-{
-    if (instance() != nullptr)
-    {
-        if (strategy == ResourceHolder::AutoRelease)
-            instance()->mResources.setReleaseStrategy(thor::Resources::AutoRelease);
-        if (strategy == ResourceHolder::ExplicitRelease)
-            instance()->mResources.setReleaseStrategy(thor::Resources::ExplicitRelease);
-    }
-}

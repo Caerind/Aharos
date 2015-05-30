@@ -5,15 +5,13 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <ctime>
+
+#include "Clock.hpp"
 
 class FileLogger
 {
     public:
-        static FileLogger* instance();
-
-        static bool open(std::string const& filename);
-        static bool isOpen();
+        FileLogger(std::string const& filename);
 
         enum LogType
         {
@@ -22,27 +20,52 @@ class FileLogger
             Info,
         };
 
-        static void write(LogType type, std::string const& message);
-        static void write(std::string const& message);
+        friend FileLogger& operator<<(FileLogger& log, std::string const& message)
+        {
+            std::stringstream ss;
+            ss << getTime(log.mTimeFormat);
+            switch (log.mType)
+            {
+                case FileLogger::LogType::Error:
+                    ss << "[ERROR] : ";
+                    break;
 
-        static void useConsole(bool use);
-        static bool usingConsole();
+                case FileLogger::LogType::Warning:
+                    ss << "[WARNING] : ";
+                    break;
 
-        static void setTimeFormat(std::string const& timeFormat);
-        static std::string getTimeFormat();
+                default:
+                    ss << "[INFO] : ";
+            }
+            ss << message;
+            std::string str = ss.str();
 
-        static std::string getTime(std::string timeFormat);
+            if (log.mConsole)
+                std::cout << str << std::endl;
+
+            if (log.mFile.is_open())
+                log.mFile << str << std::endl;
+
+            log.mType = FileLogger::LogType::Info;
+
+            return log;
+        }
+
+        friend FileLogger& operator<<(FileLogger& log, LogType type)
+        {
+            log.mType = type;
+            return log;
+        }
+
+    protected:
+        void useConsole(bool use);
+        void setTimeFormat(std::string const& timeFormat);
 
     private:
-        FileLogger();
-        ~FileLogger();
-
-        static FileLogger gInstance;
-        static bool gInitialised;
-
         std::ofstream mFile;
         bool mConsole;
         std::string mTimeFormat;
+        LogType mType;
 };
 
 #endif // FILELOGGER_HPP
