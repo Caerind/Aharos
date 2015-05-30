@@ -11,14 +11,11 @@
 #include "DebugScreen.hpp"
 #include "FileLogger.hpp"
 #include "ResourceHolder.hpp"
-
-#include "Window.hpp"
-#include "MusicManager.hpp"
-#include "Statistics.hpp"
-#include "String.hpp"
 #include "StateManager.hpp"
+#include "String.hpp"
+#include "Window.hpp"
 
-class Application : public FileLogger, public ResourceHolder, public DebugScreen, public DataManager
+class Application : public FileLogger, public ResourceHolder, public Window, public DebugScreen, public DataManager
 {
     public:
         Application();

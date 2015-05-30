@@ -1,6 +1,6 @@
 #include "Application.hpp"
 
-Application::Application() : FileLogger("sys.log"), ResourceHolder(), DebugScreen(), mStates(*this), mFpsFrames(0)
+Application::Application() : FileLogger("sys.log"), ResourceHolder(), Window(), DebugScreen(), mStates(*this), mFpsFrames(0)
 {
 }
 

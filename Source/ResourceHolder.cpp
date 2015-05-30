@@ -1,5 +1,10 @@
 #include "ResourceHolder.hpp"
 
+ResourceHolder::ResourceHolder()
+{
+
+}
+
 sf::Font& ResourceHolder::getFont(std::string const& filename)
 {
     return mFonts.acquire(filename,thor::Resources::fromFile<sf::Font>(filename),thor::Resources::Reuse);

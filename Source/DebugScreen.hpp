@@ -21,7 +21,7 @@ class DebugScreen
 
         void showDebugScreen();
         void hideDebugScreen();
-        bool isDebugSreenVisible();
+        bool isDebugScreenVisible();
 
         void update();
 

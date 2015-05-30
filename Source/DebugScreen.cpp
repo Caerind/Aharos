@@ -50,7 +50,7 @@ void DebugScreen::update()
         for (auto itr = mValues.begin(); itr != mValues.end(); itr++)
         {
             itr->second.setFont(*mFont);
-            itr->second.setCharacterSize(mCharSize);
+            itr->second.setCharacterSize(mCharsize);
             itr->second.setPosition(sf::Vector2f(5.f,pos));
             pos += itr->second.getGlobalBounds().height + 5.f;
         }
