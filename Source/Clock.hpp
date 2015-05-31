@@ -1,10 +1,13 @@
-#ifndef CLOCK_HPP
-#define CLOCK_HPP
+#ifndef AH_CLOCK_HPP
+#define AH_CLOCK_HPP
 
 #include <ctime>
 #include <string>
 
 #include "String.hpp"
+
+namespace ah
+{
 
 std::string getTime(std::string timeFormat);
 
@@ -16,4 +19,6 @@ int getDay();
 int getMonth();
 int getYear();
 
-#endif // CLOCK_HPP
+}
+
+#endif // AH_CLOCK_HPP

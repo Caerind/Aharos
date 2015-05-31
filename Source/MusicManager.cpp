@@ -1,5 +1,8 @@
 #include "MusicManager.hpp"
 
+namespace ah
+{
+
 MusicManager::MusicManager() : mLoopMode(true)
 {
     mMusic = std::make_shared<sf::Music>();
@@ -53,3 +56,4 @@ void MusicManager::updateMusicManager()
     }
 }
 
+}

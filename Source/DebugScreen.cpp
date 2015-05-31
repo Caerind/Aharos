@@ -1,5 +1,8 @@
 #include "DebugScreen.hpp"
 
+namespace ah
+{
+
 DebugScreen::DebugScreen() : mFont(nullptr), mCharsize(20), mShowDebugScreen(false), mValues()
 {
 }
@@ -68,4 +71,6 @@ void DebugScreen::draw(sf::RenderTarget& target, sf::RenderStates states) const
             target.draw(itr->second);
         }
     }
+}
+
 }

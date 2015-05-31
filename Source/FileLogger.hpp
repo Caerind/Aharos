@@ -1,5 +1,5 @@
-#ifndef FILELOGGER_HPP
-#define FILELOGGER_HPP
+#ifndef AH_FILELOGGER_HPP
+#define AH_FILELOGGER_HPP
 
 #include <fstream>
 #include <iostream>
@@ -7,6 +7,9 @@
 #include <string>
 
 #include "Clock.hpp"
+
+namespace ah
+{
 
 class FileLogger
 {
@@ -71,4 +74,6 @@ class FileLogger
         LogType mType;
 };
 
-#endif // FILELOGGER_HPP
+}
+
+#endif // AH_FILELOGGER_HPP

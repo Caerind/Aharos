@@ -1,5 +1,5 @@
-#ifndef SOUNDMANAGER_HPP
-#define SOUNDMANAGER_HPP
+#ifndef AH_SOUNDMANAGER_HPP
+#define AH_SOUNDMANAGER_HPP
 
 #include <memory>
 #include <string>
@@ -9,6 +9,9 @@
 #include <SFML/Audio/SoundBuffer.hpp>
 
 #include <Thor/Resources.hpp>
+
+namespace ah
+{
 
 class SoundManager
 {
@@ -27,4 +30,6 @@ class SoundManager
         std::vector<std::shared_ptr<sf::Sound>> mSounds;
 };
 
-#endif // SOUNDMANAGER_HPP
+}
+
+#endif // AH_SOUNDMANAGER_HPP

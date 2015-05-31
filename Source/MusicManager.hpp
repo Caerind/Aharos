@@ -1,5 +1,5 @@
-#ifndef MUSICMANAGER_HPP
-#define MUSICMANAGER_HPP
+#ifndef AH_MUSICMANAGER_HPP
+#define AH_MUSICMANAGER_HPP
 
 #include <memory>
 #include <string>
@@ -7,6 +7,9 @@
 #include <SFML/Audio/Music.hpp>
 
 #include <Thor/Math/Random.hpp>
+
+namespace ah
+{
 
 class MusicManager
 {
@@ -29,4 +32,6 @@ class MusicManager
         bool mLoopMode;
 };
 
-#endif // MUSICMANAGER_HPP
+}
+
+#endif // AH_MUSICMANAGER_HPP

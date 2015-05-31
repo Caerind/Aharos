@@ -1,9 +1,12 @@
-#ifndef LANG_HPP
-#define LANG_HPP
+#ifndef AH_LANG_HPP
+#define AH_LANG_HPP
 
 #include <fstream>
 #include <map>
 #include <string>
+
+namespace ah
+{
 
 class Lang
 {
@@ -19,4 +22,6 @@ class Lang
         std::map<std::string,std::string> mLang;
 };
 
-#endif // LANG_HPP
+}
+
+#endif // AH_LANG_HPP

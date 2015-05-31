@@ -1,5 +1,8 @@
 #include "SoundManager.hpp"
 
+namespace ah
+{
+
 SoundManager::SoundManager()
 {
 }
@@ -39,4 +42,6 @@ void SoundManager::updateSoundManager()
             mSounds.erase(itr);
         }
     }
+}
+
 }

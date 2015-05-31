@@ -1,5 +1,5 @@
-#ifndef DEBUGSCREEN_HPP
-#define DEBUGSCREEN_HPP
+#ifndef AH_DEBUGSCREEN_HPP
+#define AH_DEBUGSCREEN_HPP
 
 #include <map>
 #include <memory>
@@ -9,6 +9,9 @@
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Text.hpp>
+
+namespace ah
+{
 
 class DebugScreen : public sf::Drawable
 {
@@ -36,4 +39,6 @@ class DebugScreen : public sf::Drawable
         std::map<std::string,sf::Text> mValues;
 };
 
-#endif // DEBUGSCREEN_HPP
+}
+
+#endif // AH_DEBUGSCREEN_HPP

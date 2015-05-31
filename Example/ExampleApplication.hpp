@@ -5,7 +5,7 @@
 
 #include "ExampleState.hpp"
 
-class ExampleApplication : public Application
+class ExampleApplication : public ah::Application
 {
     public:
         ExampleApplication();

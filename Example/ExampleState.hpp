@@ -5,10 +5,10 @@
 
 #include "../Source/State.hpp"
 
-class ExampleState : public State
+class ExampleState : public ah::State
 {
     public:
-        ExampleState(StateManager& manager);
+        ExampleState(ah::StateManager& manager);
 
         static std::string getID();
 

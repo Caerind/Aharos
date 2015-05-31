@@ -1,10 +1,13 @@
-#ifndef DATAMANAGER_HPP
-#define DATAMANAGER_HPP
+#ifndef AH_DATAMANAGER_HPP
+#define AH_DATAMANAGER_HPP
 
 #include <map>
 #include <string>
 
 #include "String.hpp"
+
+namespace ah
+{
 
 class DataManager
 {
@@ -37,7 +40,6 @@ T DataManager::getData(std::string const& id)
     return T();
 }
 
+}
 
-
-
-#endif // DATAMANAGER_HPP
+#endif // AH_DATAMANAGER_HPP

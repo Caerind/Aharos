@@ -1,5 +1,8 @@
 #include "Application.hpp"
 
+namespace ah
+{
+
 Application::Application() : mStates(*this), mFpsFrames(0)
 {
 }
@@ -83,4 +86,6 @@ void Application::render()
     Window::draw(mStates);
     Window::draw(*this);
     Window::display();
+}
+
 }

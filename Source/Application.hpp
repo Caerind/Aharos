@@ -1,5 +1,5 @@
-#ifndef APPLICATION_HPP
-#define APPLICATION_HPP
+#ifndef AH_APPLICATION_HPP
+#define AH_APPLICATION_HPP
 
 #include <string>
 #include <iostream>
@@ -19,6 +19,9 @@
 #include "StateManager.hpp"
 #include "String.hpp"
 #include "Window.hpp"
+
+namespace ah
+{
 
 class Application : public FileLogger, public ResourceHolder, public Window, public DebugScreen, public DataManager, public Lang, public MusicManager, public SoundManager
 {
@@ -64,4 +67,6 @@ void Application::registerState(std::string const& stateId)
     mStates.registerState<T>(stateId);
 }
 
-#endif // APPLICATION_HPP
+}
+
+#endif // AH_APPLICATION_HPP

@@ -1,5 +1,5 @@
-#ifndef RESOURCEHOLDER_HPP
-#define RESOURCEHOLDER_HPP
+#ifndef AH_RESOURCEHOLDER_HPP
+#define AH_RESOURCEHOLDER_HPP
 
 #include <string>
 
@@ -9,6 +9,9 @@
 #include <SFML/Graphics/Texture.hpp>
 
 #include <Thor/Resources.hpp>
+
+namespace ah
+{
 
 class ResourceHolder
 {
@@ -27,4 +30,6 @@ class ResourceHolder
         thor::ResourceHolder<sf::Texture,       std::string> mTextures;
 };
 
-#endif // RESOURCEHOLDER_HPP
+}
+
+#endif // AH_RESOURCEHOLDER_HPP

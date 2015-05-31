@@ -1,11 +1,14 @@
-#ifndef WINDOW_HPP
-#define WINDOW_HPP
+#ifndef AH_WINDOW_HPP
+#define AH_WINDOW_HPP
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Window/Window.hpp>
+
+namespace ah
+{
 
 class Window : public sf::RenderWindow
 {
@@ -81,4 +84,6 @@ class Window : public sf::RenderWindow
         sf::Texture mCursorTexture;
 };
 
-#endif // WINDOW_HPP
+}
+
+#endif // AH_WINDOW_HPP

@@ -1,11 +1,14 @@
-#ifndef STATE_HPP
-#define STATE_HPP
+#ifndef AH_STATE_HPP
+#define AH_STATE_HPP
 
 #include <memory>
 
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Transformable.hpp>
 #include <SFML/System/Time.hpp>
+
+namespace ah
+{
 
 class Application;
 class StateManager;
@@ -39,4 +42,6 @@ class State : public sf::Drawable, public sf::Transformable
         std::string mType;
 };
 
-#endif // STATE_HPP
+}
+
+#endif // AH_STATE_HPP

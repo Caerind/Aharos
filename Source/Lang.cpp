@@ -1,5 +1,8 @@
 #include "Lang.hpp"
 
+namespace ah
+{
+
 Lang::Lang()
 {
 }
@@ -41,4 +44,6 @@ std::string Lang::getLang(std::string const& id)
         return mLang.at(id);
     }
     return "";
+}
+
 }

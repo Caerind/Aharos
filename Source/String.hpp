@@ -1,7 +1,10 @@
-#ifndef STRING_HPP
-#define STRING_HPP
+#ifndef AH_STRING_HPP
+#define AH_STRING_HPP
 
 #include <sstream>
+
+namespace ah
+{
 
 template<typename T>
 std::string to_string(T const& value);
@@ -36,4 +39,6 @@ bool from_string(std::string const& str, T& dest)
     return iss >> dest != 0;
 }
 
-#endif // STRING_HPP
+}
+
+#endif // AH_STRING_HPP

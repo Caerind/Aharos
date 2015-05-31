@@ -4,6 +4,9 @@
 
 #include <cassert>
 
+namespace ah
+{
+
 StateManager::StateManager(Application& app) : mApplication(app)
 {
 }
@@ -111,4 +114,6 @@ State::Ptr StateManager::createState(std::string const& id)
 Application& StateManager::getApplication()
 {
     return mApplication;
+}
+
 }

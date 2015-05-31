@@ -1,5 +1,8 @@
 #include "Window.hpp"
 
+namespace ah
+{
+
 Window::Window()
 {
     mTitle = "";
@@ -173,4 +176,6 @@ void Window::setMouseCursorTextureRect(sf::IntRect rect)
 void Window::setMouseCursorOrigin(sf::Vector2f origin)
 {
     mCursor.setOrigin(origin);
+}
+
 }

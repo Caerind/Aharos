@@ -2,6 +2,9 @@
 #include "StateManager.hpp"
 #include "Application.hpp"
 
+namespace ah
+{
+
 std::string State::getID()
 {
     return "State";
@@ -54,4 +57,6 @@ void State::requestPop()
 void State::requestClear()
 {
     mManager.clearStates();
+}
+
 }

@@ -1,11 +1,14 @@
-#ifndef STATEMANAGER_HPP
-#define STATEMANAGER_HPP
+#ifndef AH_STATEMANAGER_HPP
+#define AH_STATEMANAGER_HPP
 
 #include <functional>
 #include <map>
 #include <vector>
 
 #include "State.hpp"
+
+namespace ah
+{
 
 class Application;
 
@@ -68,4 +71,6 @@ void StateManager::registerState(std::string const& id)
 	};
 }
 
-#endif // STATEMANAGER_HPP
+}
+
+#endif // AH_STATEMANAGER_HPP

@@ -1,5 +1,8 @@
 #include "FileLogger.hpp"
 
+namespace ah
+{
+
 FileLogger::FileLogger() : mFile(), mConsole(false), mTimeFormat("[%x][%X]"), mType(FileLogger::LogType::Info)
 {
 }
@@ -23,4 +26,6 @@ void FileLogger::useConsole(bool use)
 void FileLogger::setTimeFormat(std::string const& timeFormat)
 {
     mTimeFormat = timeFormat;
+}
+
 }

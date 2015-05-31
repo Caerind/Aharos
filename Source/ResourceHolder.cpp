@@ -1,5 +1,8 @@
 #include "ResourceHolder.hpp"
 
+namespace ah
+{
+
 ResourceHolder::ResourceHolder()
 {
 }
@@ -24,3 +27,4 @@ sf::Texture& ResourceHolder::getTexture(std::string const& filename)
     return mTextures.acquire(filename,thor::Resources::fromFile<sf::Texture>(filename),thor::Resources::Reuse);
 }
 
+}

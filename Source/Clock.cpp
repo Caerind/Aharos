@@ -1,5 +1,8 @@
 #include "Clock.hpp"
 
+namespace ah
+{
+
 std::string getTime(std::string timeFormat)
 {
     time_t rawtime;
@@ -39,4 +42,6 @@ int getMonth()
 int getYear()
 {
     return from_string<int>(getTime("%y"));
+}
+
 }
