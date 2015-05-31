@@ -60,7 +60,15 @@ void Application::pushState(std::string const& stateId)
 
 void Application::handleEvents()
 {
-    mActionMap.update(*this);
+    mActionMap.clearEvents();
+
+    sf::Event event;
+    while (Window::pollEvent(event))
+    {
+        mActionMap.pushEvent(event);
+        mStates.handleEvent(event);
+    }
+
     mActionMap.invokeCallbacks(mCallbackSystem,this);
 }
 

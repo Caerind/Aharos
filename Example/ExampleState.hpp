@@ -14,6 +14,7 @@ class ExampleState : public ah::State
 
         typedef std::unique_ptr<ExampleState> Ptr;
 
+        bool handleEvent(sf::Event const& event);
         bool update(sf::Time dt);
         void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

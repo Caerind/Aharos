@@ -17,6 +17,16 @@ std::string ExampleState::getID()
     return "ExampleState";
 }
 
+bool ExampleState::handleEvent(sf::Event const& event)
+{
+    /*
+    Events can be handled via the thor::ActionMap in the Application
+    But an interface is still provided if you prefer not using thor::ActionMap
+    */
+
+    return true;
+}
+
 bool ExampleState::update(sf::Time dt)
 {
     if (getApplication().isActionActive("quit") || mSprite.getPosition().x >= 800.f)

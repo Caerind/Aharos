@@ -7,6 +7,7 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Transformable.hpp>
 #include <SFML/System/Time.hpp>
+#include <SFML/Window/Event.hpp>
 
 namespace ah
 {
@@ -25,6 +26,7 @@ class State : public sf::Drawable, public sf::Transformable
         State(StateManager& manager);
         virtual ~State();
 
+        virtual bool handleEvent(sf::Event const& event);
         virtual bool update(sf::Time dt);
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

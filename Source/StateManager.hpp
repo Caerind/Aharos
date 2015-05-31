@@ -20,6 +20,7 @@ class StateManager : public sf::Drawable
 		template<typename T>
 		void registerState(std::string const& id);
 
+        void handleEvent(sf::Event const& event);
 		void update(sf::Time dt);
 		void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
@@ -49,10 +50,11 @@ class StateManager : public sf::Drawable
 			std::string id;
 		};
 
+		void applyPendingChanges();
+		State::Ptr createState(std::string const& id);
+
 	private:
         Application& mApplication;
-
-		State::Ptr createState(std::string const& id);
 
 		std::string mLastActiveStateType;
 
