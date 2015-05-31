@@ -1,9 +1,9 @@
 #ifndef SOUNDMANAGER_HPP
 #define SOUNDMANAGER_HPP
 
-#include <vector>
 #include <memory>
 #include <string>
+#include <vector>
 
 #include <SFML/Audio/Sound.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>

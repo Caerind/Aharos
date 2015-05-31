@@ -2,5 +2,4 @@
 
 DataManager::DataManager()
 {
-    //ctor
 }

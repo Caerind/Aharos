@@ -6,7 +6,7 @@
 
 #include "String.hpp"
 
-std::string getTime(std::string timeFormat = "[%x][%X]");
+std::string getTime(std::string timeFormat);
 
 int getHours();
 int getMinutes();

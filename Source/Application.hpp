@@ -36,9 +36,6 @@ class Application : public FileLogger, public ResourceHolder, public Window, pub
         void setAction(std::string const& id, thor::Action action);
         bool isActionActive(std::string const& id);
 
-        //TODO
-        //void connect(...);
-
     protected:
         template <typename T>
         void registerState(std::string const& stateId);
@@ -53,11 +50,12 @@ class Application : public FileLogger, public ResourceHolder, public Window, pub
     private:
         StateManager mStates;
 
-        ActionMap mActionMap;
-        CallbackSystem mCallbackSystem;
-
         sf::Time mFpsTimer;
         unsigned int mFpsFrames;
+
+    protected:
+        ActionMap mActionMap;
+        CallbackSystem mCallbackSystem;
 };
 
 template <typename T>

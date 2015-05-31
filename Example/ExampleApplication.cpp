@@ -15,6 +15,8 @@ ExampleApplication::ExampleApplication() : Application()
     DebugScreen::setCharsize(20);
     DebugScreen::showDebugScreen();
 
+
+
     Application::registerState<ExampleState>(ExampleState::getID());
     Application::pushState(ExampleState::getID());
 }

@@ -2,7 +2,11 @@
 
 ResourceHolder::ResourceHolder()
 {
+}
 
+sf::SoundBuffer& ResourceHolder::getSoundBuffer(std::string const& filename)
+{
+    return mSoundBuffers.acquire(filename,thor::Resources::fromFile<sf::SoundBuffer>(filename),thor::Resources::Reuse);
 }
 
 sf::Font& ResourceHolder::getFont(std::string const& filename)

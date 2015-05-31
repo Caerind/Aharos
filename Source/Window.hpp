@@ -12,10 +12,7 @@ class Window : public sf::RenderWindow
     public:
         Window();
 
-        //
-        // Window Part
-        //
-    public:
+    public: // Window
         void create(sf::VideoMode videoMode, std::string title, sf::Uint32 style = sf::Style::Default);
 
         void setSize(sf::Vector2i size);
@@ -37,16 +34,11 @@ class Window : public sf::RenderWindow
         void setKeyRepeatEnabled(bool enabled);
         bool isKeyRepeatEnabled();
 
-        //
-        // Icon
-        //
-    protected:
+    protected: // Icon
         void setIcon(std::string const& filename);
 
-        //
-        // Mouse
-        //
-    public:
+
+    public: // Mouse
         void setMousePosition2i(sf::Vector2i pos);
         void setMousePosition(sf::Vector2f pos);
         void setMousePositionMap(sf::Vector2f pos);
@@ -56,10 +48,7 @@ class Window : public sf::RenderWindow
         sf::Vector2f getMousePositionMap();
         sf::Vector2f getMousePositionView(sf::View const& view);
 
-        //
-        // Cursor
-        //
-    public:
+    public: // Cursor
         enum MouseCursor
         {
             Default,

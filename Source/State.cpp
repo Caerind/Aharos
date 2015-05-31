@@ -26,6 +26,21 @@ void State::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 }
 
+std::string State::getType() const
+{
+    return mType;
+}
+
+bool State::isActiveState() const
+{
+    return mType == mManager.getActiveStateType();
+}
+
+Application& State::getApplication()
+{
+    return mManager.getApplication();
+}
+
 void State::requestPush(std::string const& id)
 {
     mManager.pushState(id);
@@ -39,19 +54,4 @@ void State::requestPop()
 void State::requestClear()
 {
     mManager.clearStates();
-}
-
-std::string State::getType() const
-{
-    return mType;
-}
-
-Application& State::getApplication()
-{
-    return mManager.getApplication();
-}
-
-bool State::isActiveState() const
-{
-    return mType == mManager.getActiveStateType();
 }

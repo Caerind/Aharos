@@ -25,6 +25,8 @@ class MusicManager
     private:
         std::shared_ptr<sf::Music> mMusic;
         std::vector<std::string> mFilenames;
+        int mPlaylistIndex;
+        bool mLoopMode;
 };
 
 #endif // MUSICMANAGER_HPP

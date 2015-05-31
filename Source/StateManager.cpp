@@ -21,66 +21,8 @@ void StateManager::update(sf::Time dt)
 		if(!(*itr)->update(dt))
 			break;
 	}
-    applyPendingChanges();
-}
 
-void StateManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-	for(auto itr = mStates.begin(); itr != mStates.end(); itr++)
-	{
-        target.draw(*(*itr));
-	}
-}
-
-void StateManager::pushState(std::string const& id)
-{
-	mPendingList.push_back(PendingChange(Push, id));
-}
-
-void StateManager::popState()
-{
-	mPendingList.push_back(PendingChange(Pop));
-}
-
-void StateManager::clearStates()
-{
-	mPendingList.push_back(PendingChange(Clear));
-}
-
-bool StateManager::isEmpty() const
-{
-	return mStates.empty();
-}
-
-std::size_t StateManager::getStatesCount() const
-{
-	return mStates.size();
-}
-
-std::string StateManager::getActiveStateType() const
-{
-    if (!mStates.empty())
-    {
-        return mStates.back()->getType();
-    }
-    return "";
-}
-
-std::string StateManager::getLastActiveStateType() const
-{
-    return mLastActiveStateType;
-}
-
-State::Ptr StateManager::createState(std::string const& id)
-{
-	auto found = mFactories.find(id);
-	assert(found != mFactories.end());
-	return found->second();
-}
-
-void StateManager::applyPendingChanges()
-{
-	for(PendingChange change : mPendingList)
+    for(PendingChange change : mPendingList)
 	{
 		switch(change.action)
 		{
@@ -110,6 +52,60 @@ void StateManager::applyPendingChanges()
 		}
 	}
 	mPendingList.clear();
+}
+
+void StateManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+	for(auto itr = mStates.begin(); itr != mStates.end(); itr++)
+	{
+        target.draw(*(*itr));
+	}
+}
+
+void StateManager::pushState(std::string const& id)
+{
+	mPendingList.push_back(PendingChange(Push, id));
+}
+
+void StateManager::popState()
+{
+	mPendingList.push_back(PendingChange(Pop));
+}
+
+void StateManager::clearStates()
+{
+	mPendingList.push_back(PendingChange(Clear));
+}
+
+bool StateManager::empty() const
+{
+	return mStates.empty();
+}
+
+std::size_t StateManager::size() const
+{
+	return mStates.size();
+}
+
+std::string StateManager::getActiveStateType() const
+{
+    if (!mStates.empty())
+    {
+        return mStates.back()->getType();
+    }
+    return "";
+}
+
+std::string StateManager::getLastActiveStateType() const
+{
+    return mLastActiveStateType;
+}
+
+State::Ptr StateManager::createState(std::string const& id)
+{
+	auto found = mFactories.find(id);
+	assert(found != mFactories.end());
+	return found->second();
 }
 
 Application& StateManager::getApplication()

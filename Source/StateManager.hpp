@@ -24,12 +24,10 @@ class StateManager : public sf::Drawable
 		void popState();
 		void clearStates();
 
-		bool isEmpty() const;
-		std::size_t getStatesCount() const;
+		bool empty() const;
+		std::size_t size() const;
 		std::string getActiveStateType() const;
 		std::string getLastActiveStateType() const;
-
-		void applyPendingChanges();
 
 		Application& getApplication();
 

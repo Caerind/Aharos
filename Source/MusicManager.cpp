@@ -1,6 +1,6 @@
 #include "MusicManager.hpp"
 
-MusicManager::MusicManager()
+MusicManager::MusicManager() : mLoopMode(true)
 {
     mMusic = std::make_shared<sf::Music>();
 }
@@ -12,6 +12,7 @@ MusicManager::~MusicManager()
 
 std::shared_ptr<sf::Music> MusicManager::playLoop(std::string const& filename)
 {
+    mLoopMode = true;
     mMusic->setLoop(true);
     mMusic->stop();
     if (mMusic->openFromFile(filename))
@@ -23,8 +24,10 @@ std::shared_ptr<sf::Music> MusicManager::playLoop(std::string const& filename)
 
 std::shared_ptr<sf::Music> MusicManager::playList()
 {
+    mLoopMode = false;
     mMusic->setLoop(false);
     mMusic->stop();
+    mPlaylistIndex = -1;
     MusicManager::updateMusicManager();
     return mMusic;
 }
@@ -36,10 +39,14 @@ std::vector<std::string>& MusicManager::getPlaylist()
 
 void MusicManager::updateMusicManager()
 {
-    if (!mMusic->getLoop() && mMusic->getStatus() == sf::Music::Status::Stopped)
+    if (!mLoopMode && mMusic->getStatus() == sf::Music::Status::Stopped)
     {
-        int max = mFilenames.size()-1;
-        if (mMusic->openFromFile(mFilenames.at(thor::random(0,max))))
+        mPlaylistIndex++;
+        if (mPlaylistIndex == static_cast<int>(mFilenames.size()))
+        {
+            mPlaylistIndex = 0;
+        }
+        if (mMusic->openFromFile(mFilenames.at(mPlaylistIndex)))
         {
             mMusic->play();
         }

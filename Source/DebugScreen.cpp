@@ -16,18 +16,6 @@ void DebugScreen::setDebugInfo(std::string const& id, std::string const& value)
     mValues[id].setString(id + " : " + value);
 }
 
-void DebugScreen::setFont(sf::Font& font)
-{
-    mFont = std::make_shared<sf::Font>(font);
-    update();
-}
-
-void DebugScreen::setCharsize(std::size_t charsize)
-{
-    mCharsize = charsize;
-    update();
-}
-
 void DebugScreen::showDebugScreen()
 {
     mShowDebugScreen = true;
@@ -41,6 +29,18 @@ void DebugScreen::hideDebugScreen()
 bool DebugScreen::isDebugScreenVisible()
 {
     return mShowDebugScreen;
+}
+
+void DebugScreen::setFont(sf::Font& font)
+{
+    mFont = std::make_shared<sf::Font>(font);
+    update();
+}
+
+void DebugScreen::setCharsize(std::size_t charsize)
+{
+    mCharsize = charsize;
+    update();
 }
 
 void DebugScreen::update()
@@ -58,7 +58,7 @@ void DebugScreen::update()
     }
 }
 
-void DebugScreen::render(sf::RenderTarget& target) const
+void DebugScreen::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     if (mShowDebugScreen)
     {

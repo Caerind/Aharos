@@ -5,6 +5,8 @@ ExampleState::ExampleState(StateManager& manager)
 : State(manager)
 {
     mType = ExampleState::getID();
+
+    getApplication().setAction("quit",thor::Action(sf::Event::Closed));
 }
 
 std::string ExampleState::getID()
@@ -14,6 +16,11 @@ std::string ExampleState::getID()
 
 bool ExampleState::update(sf::Time dt)
 {
+    if (getApplication().isActionActive("quit"))
+    {
+        getApplication().close();
+    }
+
     return true;
 }
 

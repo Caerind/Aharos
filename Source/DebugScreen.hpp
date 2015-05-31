@@ -4,28 +4,30 @@
 #include <map>
 #include <memory>
 
+#include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Text.hpp>
 
-class DebugScreen
+class DebugScreen : public sf::Drawable
 {
     public:
         DebugScreen();
 
         void setDebugInfo(std::string const& id, std::string const& value);
 
-    protected:
-        void setFont(sf::Font& font);
-        void setCharsize(std::size_t charsize);
-
         void showDebugScreen();
         void hideDebugScreen();
         bool isDebugScreenVisible();
 
+    protected:
+        void setFont(sf::Font& font);
+        void setCharsize(std::size_t charsize);
+
         void update();
 
-        void render(sf::RenderTarget& target) const;
+        void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
     private:
         std::shared_ptr<sf::Font> mFont;

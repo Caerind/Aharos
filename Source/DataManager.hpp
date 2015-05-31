@@ -4,8 +4,6 @@
 #include <map>
 #include <string>
 
-#include <Thor/Graphics/ToString.hpp>
-
 #include "String.hpp"
 
 class DataManager

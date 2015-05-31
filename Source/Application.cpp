@@ -1,6 +1,6 @@
 #include "Application.hpp"
 
-Application::Application() : FileLogger(), mStates(*this), mFpsFrames(0)
+Application::Application() : mStates(*this), mFpsFrames(0)
 {
 }
 
@@ -20,7 +20,7 @@ void Application::run()
 			handleEvents();
 			update(TimePerFrame);
 
-			if (mStates.isEmpty())
+			if (mStates.empty())
                 close();
 
 			std::cout << std::flush;
@@ -58,6 +58,7 @@ void Application::pushState(std::string const& stateId)
 void Application::handleEvents()
 {
     mActionMap.update(*this);
+    mActionMap.invokeCallbacks(mCallbackSystem,this);
 }
 
 void Application::update(sf::Time dt)
@@ -68,18 +69,18 @@ void Application::update(sf::Time dt)
     mFpsFrames++;
     if (mFpsTimer >= sf::seconds(1.0f))
     {
-        setDebugInfo("FPS",to_string(mFpsFrames));
+        DebugScreen::setDebugInfo("FPS",to_string(mFpsFrames));
         mFpsTimer -= sf::seconds(1.0f);
         mFpsFrames = 0;
     }
 
-    //MusicManager::update();
+    MusicManager::updateMusicManager();
 }
 
 void Application::render()
 {
-    clear();
-    draw(mStates);
-    DebugScreen::render(*this);
-    display();
+    Window::clear();
+    Window::draw(mStates);
+    Window::draw(*this);
+    Window::display();
 }
