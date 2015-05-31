@@ -1,5 +1,5 @@
-#ifndef AH_FILELOGGER_HPP
-#define AH_FILELOGGER_HPP
+#ifndef AH_LOG_HPP
+#define AH_LOG_HPP
 
 #include <fstream>
 #include <iostream>
@@ -11,10 +11,10 @@
 namespace ah
 {
 
-class FileLogger
+class Log
 {
     public:
-        FileLogger();
+        Log();
 
         bool openLog(std::string const& filename);
         bool isLogOpen();
@@ -26,17 +26,17 @@ class FileLogger
             Info,
         };
 
-        friend FileLogger& operator<<(FileLogger& log, std::string const& message)
+        friend Log& operator<<(Log& log, std::string const& message)
         {
             std::stringstream ss;
             ss << getTime(log.mTimeFormat);
             switch (log.mType)
             {
-                case FileLogger::LogType::Error:
+                case Log::Error:
                     ss << "[ERROR] : ";
                     break;
 
-                case FileLogger::LogType::Warning:
+                case Log::Warning:
                     ss << "[WARNING] : ";
                     break;
 
@@ -52,12 +52,12 @@ class FileLogger
             if (log.mFile.is_open())
                 log.mFile << str << std::endl;
 
-            log.mType = FileLogger::LogType::Info;
+            log.mType = Log::Info;
 
             return log;
         }
 
-        friend FileLogger& operator<<(FileLogger& log, LogType type)
+        friend Log& operator<<(Log& log, LogType type)
         {
             log.mType = type;
             return log;
@@ -76,4 +76,4 @@ class FileLogger
 
 }
 
-#endif // AH_FILELOGGER_HPP
+#endif // AH_LOG_HPP

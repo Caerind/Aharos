@@ -11,8 +11,8 @@
 
 #include "DataManager.hpp"
 #include "DebugScreen.hpp"
-#include "FileLogger.hpp"
 #include "Lang.hpp"
+#include "Log.hpp"
 #include "MusicManager.hpp"
 #include "ResourceHolder.hpp"
 #include "SoundManager.hpp"
@@ -23,7 +23,7 @@
 namespace ah
 {
 
-class Application : public FileLogger, public ResourceHolder, public Window, public DebugScreen, public DataManager, public Lang, public MusicManager, public SoundManager
+class Application : public Log, public ResourceHolder, public Window, public DebugScreen, public DataManager, public Lang, public MusicManager, public SoundManager
 {
     public:
         Application();

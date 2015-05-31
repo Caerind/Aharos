@@ -19,6 +19,7 @@ class ExampleState : public ah::State
 
     private:
         sf::Sprite mSprite;
+        bool mExploded;
 };
 
 #endif // EXAMPLESTATE_HPP

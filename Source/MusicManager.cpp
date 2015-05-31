@@ -13,7 +13,7 @@ MusicManager::~MusicManager()
     mMusic = nullptr;
 }
 
-std::shared_ptr<sf::Music> MusicManager::playLoop(std::string const& filename)
+std::shared_ptr<sf::Music> MusicManager::playMusic(std::string const& filename)
 {
     mLoopMode = true;
     mMusic->setLoop(true);

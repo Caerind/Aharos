@@ -26,7 +26,7 @@ class SoundManager
         void updateSoundManager();
 
     private:
-        thor::ResourceHolder<sf::SoundBuffer,std::string,thor::Resources::RefCounted> mSoundBuffers;
+        thor::ResourceHolder<sf::SoundBuffer,std::string> mSoundBuffers;
         std::vector<std::shared_ptr<sf::Sound>> mSounds;
 };
 

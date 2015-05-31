@@ -17,7 +17,7 @@ class MusicManager
         MusicManager();
         ~MusicManager();
 
-        std::shared_ptr<sf::Music> playLoop(std::string const& filename);
+        std::shared_ptr<sf::Music> playMusic(std::string const& filename);
         std::shared_ptr<sf::Music> playList();
 
         std::vector<std::string>& getPlaylist();

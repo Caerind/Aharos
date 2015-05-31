@@ -16,9 +16,7 @@ std::shared_ptr<sf::Sound> SoundManager::prepareSound(std::string const& filenam
 {
     SoundManager::updateSoundManager();
     mSounds.push_back(std::make_shared<sf::Sound>());
-    auto sb = mSoundBuffers.acquire(filename,thor::Resources::fromFile<sf::SoundBuffer>(filename),thor::Resources::Reuse);
-    if (sb != nullptr)
-        mSounds.back()->setBuffer(*sb);
+    mSounds.back()->setBuffer(mSoundBuffers.acquire(filename,thor::Resources::fromFile<sf::SoundBuffer>(filename),thor::Resources::Reuse));
     return mSounds.back();
 }
 
@@ -39,6 +37,7 @@ void SoundManager::updateSoundManager()
     {
         if ((*itr)->getStatus() == sf::Sound::Status::Stopped)
         {
+            (*itr) = nullptr;
             mSounds.erase(itr);
         }
     }

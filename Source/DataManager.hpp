@@ -33,10 +33,8 @@ void DataManager::setData(std::string const& id, T const& data)
 template<typename T>
 T DataManager::getData(std::string const& id)
 {
-    T t;
     if (mData.find(id) != mData.end())
-        if (!from_string(mData[id],t))
-            return t;
+        return from_string<T>(mData[id]);
     return T();
 }
 

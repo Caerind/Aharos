@@ -2,6 +2,7 @@
 #define AH_STATE_HPP
 
 #include <memory>
+#include <string>
 
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Transformable.hpp>
