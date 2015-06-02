@@ -15,7 +15,6 @@ class Lang
 
         std::string getLang(std::string const& id);
 
-    protected:
         void loadLang(std::string const& filename);
 
     private:

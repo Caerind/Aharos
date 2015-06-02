@@ -7,6 +7,10 @@ Application::Application() : mStates(*this), mFpsFrames(0)
 {
 }
 
+Application::~Application()
+{
+}
+
 void Application::run()
 {
     sf::Clock clock;

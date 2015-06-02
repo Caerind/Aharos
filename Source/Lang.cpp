@@ -9,7 +9,7 @@ Lang::Lang()
 
 void Lang::loadLang(std::string const& filename)
 {
-    mLang.clear();
+    //mLang.clear(); // Do not clear the previous lang, if your new lang has missing words, you will use the old ones
     std::ifstream file(filename);
     if (file)
     {

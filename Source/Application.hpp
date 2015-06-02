@@ -27,6 +27,7 @@ class Application : public Log, public ResourceHolder, public Window, public Deb
 {
     public:
         Application();
+        virtual ~Application();
 
         typedef thor::ActionMap<std::string> ActionMap;
         typedef thor::ActionMap<std::string>::CallbackSystem CallbackSystem;
