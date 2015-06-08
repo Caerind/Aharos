@@ -72,13 +72,13 @@ void Application::handleEvents()
         mActionMap.pushEvent(event);
         mStates.handleEvent(event);
     }
-
-    mActionMap.invokeCallbacks(mCallbackSystem,this);
 }
 
 void Application::update(sf::Time dt)
 {
     mStates.update(dt);
+
+    mActionMap.invokeCallbacks(mCallbackSystem,this);
 
     mFpsTimer += dt;
     mFpsFrames++;

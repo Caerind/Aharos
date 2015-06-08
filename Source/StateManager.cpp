@@ -37,6 +37,11 @@ void StateManager::update(sf::Time dt)
 	}
 
     applyPendingChanges();
+
+    if (!mStates.empty())
+    {
+        mApplication.setDebugInfo("State",mStates.back()->getType());
+    }
 }
 
 void StateManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -101,22 +106,30 @@ void StateManager::applyPendingChanges()
                 if (!mStates.empty())
                 {
                     mLastActiveStateType = mStates.back()->getType();
+                    mStates.back()->onDeactivate();
                 }
 				mStates.push_back(createState(change.id));
+				mStates.back()->onActivate();
 				break;
 
 			case Action::Pop:
                 if (!mStates.empty())
                 {
                     mLastActiveStateType = mStates.back()->getType();
+                    mStates.back()->onDeactivate();
                 }
 				mStates.pop_back();
+				if (!mStates.empty())
+                {
+                    mStates.back()->onActivate();
+                }
 				break;
 
 			case Action::Clear:
                 if (!mStates.empty())
                 {
                     mLastActiveStateType = mStates.back()->getType();
+                    mStates.back()->onDeactivate();
                 }
                 mStates.clear();
                 break;

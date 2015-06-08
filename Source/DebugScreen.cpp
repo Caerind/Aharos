@@ -14,6 +14,7 @@ void DebugScreen::setDebugInfo(std::string const& id, std::string const& value)
         sf::Text t;
         t.setColor(sf::Color::White);
         mValues[id] = t;
+        mValues[id].setString(id + " : " + value);
         update();
     }
     mValues[id].setString(id + " : " + value);

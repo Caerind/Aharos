@@ -49,6 +49,16 @@ Application& State::getApplication()
     return mManager.getApplication();
 }
 
+void State::onActivate()
+{
+
+}
+
+void State::onDeactivate()
+{
+
+}
+
 void State::requestPush(std::string const& id)
 {
     mManager.pushState(id);

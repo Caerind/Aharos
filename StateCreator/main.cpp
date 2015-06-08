@@ -19,7 +19,6 @@ void write(ofstream& o, string const& str)
     cout << str << endl;
 }
 
-
 int main()
 {
     cout << "Enter the name of the State you want to create : " << endl;

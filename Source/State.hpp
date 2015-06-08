@@ -35,6 +35,9 @@ class State : public sf::Drawable, public sf::Transformable
 
         Application& getApplication();
 
+        virtual void onActivate();
+        virtual void onDeactivate();
+
     protected:
         void requestPush(std::string const& id);
         void requestPop();
