@@ -1,14 +1,12 @@
-#ifndef AH_MUSICMANAGER_HPP
-#define AH_MUSICMANAGER_HPP
+#ifndef AM_MUSICMANAGER_HPP
+#define AM_MUSICMANAGER_HPP
 
 #include <memory>
 #include <string>
 
 #include <SFML/Audio/Music.hpp>
 
-#include <Thor/Math/Random.hpp>
-
-namespace ah
+namespace am
 {
 
 class MusicManager
@@ -20,18 +18,19 @@ class MusicManager
         std::shared_ptr<sf::Music> playMusic(std::string const& filename);
         std::shared_ptr<sf::Music> playList();
 
+        void setPlaylist(std::vector<std::string> playlist);
         std::vector<std::string>& getPlaylist();
 
     protected:
         void updateMusicManager();
 
-    private:
+    protected:
         std::shared_ptr<sf::Music> mMusic;
-        std::vector<std::string> mFilenames;
-        int mPlaylistIndex;
+        std::vector<std::string> mPlaylist;
+        unsigned int mPlaylistIndex;
         bool mLoopMode;
 };
 
-}
+} // namespace am
 
-#endif // AH_MUSICMANAGER_HPP
+#endif // AM_MUSICMANAGER_HPP

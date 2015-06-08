@@ -1,6 +1,6 @@
 #include "MusicManager.hpp"
 
-namespace ah
+namespace am
 {
 
 MusicManager::MusicManager() : mLoopMode(true)
@@ -30,14 +30,20 @@ std::shared_ptr<sf::Music> MusicManager::playList()
     mLoopMode = false;
     mMusic->setLoop(false);
     mMusic->stop();
-    mPlaylistIndex = -1;
+    mPlaylistIndex = 0;
     MusicManager::updateMusicManager();
     return mMusic;
 }
 
+void MusicManager::setPlaylist(std::vector<std::string> playlist)
+{
+    mPlaylist = playlist;
+    mPlaylistIndex = 0;
+}
+
 std::vector<std::string>& MusicManager::getPlaylist()
 {
-    return mFilenames;
+    return mPlaylist;
 }
 
 void MusicManager::updateMusicManager()
@@ -45,15 +51,18 @@ void MusicManager::updateMusicManager()
     if (!mLoopMode && mMusic->getStatus() == sf::Music::Status::Stopped)
     {
         mPlaylistIndex++;
-        if (mPlaylistIndex == static_cast<int>(mFilenames.size()))
+        if (mPlaylistIndex == mPlaylist.size())
         {
             mPlaylistIndex = 0;
         }
-        if (mMusic->openFromFile(mFilenames.at(mPlaylistIndex)))
+        if (mPlaylistIndex < mPlaylist.size() && mPlaylistIndex >= 0)
         {
-            mMusic->play();
+            if (mMusic->openFromFile(mPlaylist.at(mPlaylistIndex)))
+            {
+                mMusic->play();
+            }
         }
     }
 }
 
-}
+} // namespace am

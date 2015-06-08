@@ -3,12 +3,11 @@
 namespace ah
 {
 
-Application::Application() : mStates(*this), mFpsFrames(0)
-{
-}
+Application Application::mInstance;
 
-Application::~Application()
+Application& Application::instance()
 {
+    return mInstance;
 }
 
 void Application::run()
@@ -20,6 +19,8 @@ void Application::run()
 	{
 		sf::Time dt = clock.restart();
 		timeSinceLastUpdate += dt;
+		bool repaint = false;
+
 		while (timeSinceLastUpdate > TimePerFrame)
 		{
 			timeSinceLastUpdate -= TimePerFrame;
@@ -31,9 +32,12 @@ void Application::run()
                 close();
 
 			std::cout << std::flush;
+
+			repaint = true;
 		}
 
-		render();
+        if (repaint)
+            render();
 	}
 }
 
@@ -60,6 +64,15 @@ bool Application::isActionActive(std::string const& id)
 void Application::pushState(std::string const& stateId)
 {
     mStates.pushState(stateId);
+}
+
+
+Application::Application() : mStates(*this), mFpsFrames(0)
+{
+}
+
+Application::~Application()
+{
 }
 
 void Application::handleEvents()
@@ -89,14 +102,14 @@ void Application::update(sf::Time dt)
         mFpsFrames = 0;
     }
 
-    MusicManager::updateMusicManager();
+    am::AudioManager::update();
 }
 
 void Application::render()
 {
     Window::clear();
     Window::draw(mStates);
-    Window::draw(*this);
+    Window::draw(*this); // Draw DebugScreen
     Window::display();
 }
 

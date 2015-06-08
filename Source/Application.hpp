@@ -9,13 +9,11 @@
 
 #include <Thor/Input.hpp>
 
-#include "DataManager.hpp"
+#include "AudioManager.hpp"
 #include "DebugScreen.hpp"
-#include "Lang.hpp"
 #include "Log.hpp"
-#include "MusicManager.hpp"
+#include "Math.hpp"
 #include "ResourceHolder.hpp"
-#include "SoundManager.hpp"
 #include "StateManager.hpp"
 #include "String.hpp"
 #include "Window.hpp"
@@ -23,11 +21,10 @@
 namespace ah
 {
 
-class Application : public Log, public ResourceHolder, public Window, public DebugScreen, public DataManager, public Lang, public MusicManager, public SoundManager
+class Application : public Log, public ResourceHolder, public Window, public DebugScreen, public am::AudioManager
 {
     public:
-        Application();
-        virtual ~Application();
+        static Application& instance();
 
         typedef thor::ActionMap<std::string> ActionMap;
         typedef thor::ActionMap<std::string>::CallbackSystem CallbackSystem;
@@ -40,24 +37,26 @@ class Application : public Log, public ResourceHolder, public Window, public Deb
         void setAction(std::string const& id, thor::Action action);
         bool isActionActive(std::string const& id);
 
-    protected:
         template <typename T>
         void registerState(std::string const& stateId);
-
         void pushState(std::string const& stateId);
 
     private:
+        Application();
+        ~Application();
+
         void handleEvents();
         void update(sf::Time dt);
         void render();
 
     private:
+        static Application mInstance;
+
         StateManager mStates;
 
         sf::Time mFpsTimer;
         unsigned int mFpsFrames;
 
-    protected:
         ActionMap mActionMap;
         CallbackSystem mCallbackSystem;
 };

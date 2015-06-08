@@ -47,6 +47,9 @@ int main()
         write(header,"        bool handleEvent(sf::Event const& event);");
         write(header,"        bool update(sf::Time dt);");
         write(header,"        void draw(sf::RenderTarget& target, sf::RenderStates states) const;");
+		write(header,"");
+        write(header,"        void onActivate();");
+        write(header,"        void onDeactivate();");
         write(header,"};");
         write(header,"");
         write(header,"#endif // " + nameMaj + "_HPP");
@@ -82,6 +85,14 @@ int main()
         write(impl,"void " + name + "::draw(sf::RenderTarget& target, sf::RenderStates states) const");
         write(impl,"{");
         write(impl,"    states.transform *= getTransform();");
+        write(impl,"}");
+		write(impl,"void " + name + "::onActivate()");
+        write(impl,"{");
+        write(impl,"");
+        write(impl,"}");
+		write(impl,"void " + name + "::onDeactivate()");
+        write(impl,"{");
+        write(impl,"");
         write(impl,"}");
         impl.close();
     }

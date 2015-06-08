@@ -37,11 +37,6 @@ void StateManager::update(sf::Time dt)
 	}
 
     applyPendingChanges();
-
-    if (!mStates.empty())
-    {
-        mApplication.setDebugInfo("State",mStates.back()->getType());
-    }
 }
 
 void StateManager::draw(sf::RenderTarget& target, sf::RenderStates states) const

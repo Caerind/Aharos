@@ -8,8 +8,7 @@ ExampleState::ExampleState(ah::StateManager& manager)
     mSprite.setTexture(getApplication().getTexture("Example/cb.bmp"));
 	mExploded = false;
     getApplication().setAction("quit",thor::Action(sf::Event::Closed));
-	getApplication().playMusic("Example/jingleAtmog.wav");
-	getApplication() << ah::Log::Info << getApplication().getLang("launched");
+	getApplication() << ah::Log::Info << "launched";
 }
 
 std::string ExampleState::getID()
@@ -34,17 +33,7 @@ bool ExampleState::update(sf::Time dt)
         getApplication().close();
     }
 
-	mSprite.move(getApplication().getData<float>("speed-x") * dt.asSeconds(), 20.f * dt.asSeconds());
-
-	if (mSprite.getPosition().x >= 300.f && !mExploded)
-    {
-        if (!getApplication().playSound(getApplication().getData<std::string>("sound-name")))
-        {
-            getApplication() << ah::Log::Error << "Error with sound";
-        }
-        mExploded = true;
-    }
-
+	mSprite.move(75.f * dt.asSeconds(), 20.f * dt.asSeconds());
     return true;
 }
 
