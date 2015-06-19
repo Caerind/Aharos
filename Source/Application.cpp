@@ -41,26 +41,6 @@ void Application::run()
 	}
 }
 
-Application::ActionMap& Application::getActionMap()
-{
-    return mActionMap;
-}
-
-Application::CallbackSystem& Application::getCallbackSystem()
-{
-    return mCallbackSystem;
-}
-
-void Application::setAction(std::string const& id, thor::Action action)
-{
-    mActionMap[id] = action;
-}
-
-bool Application::isActionActive(std::string const& id)
-{
-    return mActionMap.isActive(id);
-}
-
 void Application::pushState(std::string const& stateId)
 {
     mStates.pushState(stateId);
@@ -77,12 +57,10 @@ Application::~Application()
 
 void Application::handleEvents()
 {
-    mActionMap.clearEvents();
-
     sf::Event event;
     while (Window::pollEvent(event))
     {
-        mActionMap.pushEvent(event);
+        ActionTarget::handleEvent(event);
         mStates.handleEvent(event);
     }
 }
@@ -91,7 +69,7 @@ void Application::update(sf::Time dt)
 {
     mStates.update(dt);
 
-    mActionMap.invokeCallbacks(mCallbackSystem,this);
+    ActionTarget::update();
 
     mFpsTimer += dt;
     mFpsFrames++;

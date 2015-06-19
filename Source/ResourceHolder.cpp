@@ -7,60 +7,74 @@ ResourceHolder::ResourceHolder()
 {
 }
 
-sf::SoundBuffer& ResourceHolder::getSoundBuffer(std::string const& filename, std::string const& id)
+sf::SoundBuffer& ResourceHolder::getSoundBuffer(std::string const& id)
 {
-    if (id != "")
-    {
-        assert(mSoundBuffers[id].loadFromFile(filename));
-        return mSoundBuffers.at(id);
-    }
-    else if (mSoundBuffers.find(filename) == mSoundBuffers.end())
-    {
-        assert(mSoundBuffers[filename].loadFromFile(filename));
-    }
-    return mSoundBuffers.at(filename);
+    return mSoundBuffers.at(id);
 }
 
-sf::Font& ResourceHolder::getFont(std::string const& filename, std::string const& id)
+sf::Font& ResourceHolder::getFont(std::string const& id)
 {
-    if (id != "")
-    {
-        assert(mFonts[id].loadFromFile(filename));
-        return mFonts.at(id);
-    }
-    else if (mFonts.find(filename) == mFonts.end())
-    {
-        assert(mFonts[filename].loadFromFile(filename));
-    }
-    return mFonts.at(filename);
+    return mFonts.at(id);
 }
 
-sf::Image& ResourceHolder::getImage(std::string const& filename, std::string const& id)
+sf::Image& ResourceHolder::getImage(std::string const& id)
 {
-    if (id != "")
-    {
-        assert(mImages[id].loadFromFile(filename));
-        return mImages.at(id);
-    }
-    else if (mImages.find(filename) == mImages.end())
-    {
-        assert(mImages[filename].loadFromFile(filename));
-    }
-    return mImages.at(filename);
+    return mImages.at(id);
 }
 
-sf::Texture& ResourceHolder::getTexture(std::string const& filename, std::string const& id)
+sf::Texture& ResourceHolder::getTexture(std::string const& id)
 {
-    if (id != "")
+    return mTextures.at(id);
+}
+
+sf::Shader& ResourceHolder::getShader(std::string const& id)
+{
+    return mShaders.at(id);
+}
+
+void ResourceHolder::releaseSoundBuffer(std::string const& id)
+{
+    auto itr = mSoundBuffers.find(id);
+    if (itr != mSoundBuffers.end())
     {
-        assert(mTextures[id].loadFromFile(filename));
-        return mTextures.at(id);
+        mSoundBuffers.erase(itr);
     }
-    else if (mTextures.find(filename) == mTextures.end())
+}
+
+void ResourceHolder::releaseFont(std::string const& id)
+{
+    auto itr = mFonts.find(id);
+    if (itr != mFonts.end())
     {
-        assert(mTextures[filename].loadFromFile(filename));
+        mFonts.erase(itr);
     }
-    return mTextures.at(filename);
+}
+
+void ResourceHolder::releaseImage(std::string const& id)
+{
+    auto itr = mImages.find(id);
+    if (itr != mImages.end())
+    {
+        mImages.erase(itr);
+    }
+}
+
+void ResourceHolder::releaseTexture(std::string const& id)
+{
+    auto itr = mTextures.find(id);
+    if (itr != mTextures.end())
+    {
+        mTextures.erase(itr);
+    }
+}
+
+void ResourceHolder::releaseShader(std::string const& id)
+{
+    auto itr = mShaders.find(id);
+    if (itr != mShaders.end())
+    {
+        mShaders.erase(itr);
+    }
 }
 
 } // namespace ah

@@ -5,9 +5,9 @@ ExampleState::ExampleState(ah::StateManager& manager)
 : State(manager)
 {
     mType = ExampleState::getID();
-    mSprite.setTexture(getApplication().getTexture("Example/cb.bmp"));
+    mSprite.setTexture(getApplication().getTexture("cb"));
 	mExploded = false;
-    getApplication().setAction("quit",thor::Action(sf::Event::Closed));
+    //getApplication().setAction("quit",thor::Action(sf::Event::Closed));
 	getApplication() << ah::Log::Info << "launched";
 }
 
@@ -28,7 +28,7 @@ bool ExampleState::handleEvent(sf::Event const& event)
 
 bool ExampleState::update(sf::Time dt)
 {
-    if (getApplication().isActionActive("quit") || mSprite.getPosition().x >= 800.f)
+    if (mSprite.getPosition().x >= 800.f)
     {
         getApplication().close();
     }
