@@ -21,6 +21,9 @@ void write(ofstream& o, string const& str)
 
 int main()
 {
+    cout << "Enter the path where you want the file to be created : " << endl;
+    string path;
+    getline(cin,path);
     cout << "Enter the name of the State you want to create : " << endl;
     string name;
     cin >> name;
@@ -29,7 +32,7 @@ int main()
     transform(nameMaj.begin(), nameMaj.end(), nameMaj.begin(), my_toupper());
     cout << nameMaj;
 
-    ofstream header(name + ".hpp");
+    ofstream header(path + name + ".hpp");
     if (header)
     {
         write(header,"#ifndef " + nameMaj + "_HPP");
@@ -56,7 +59,7 @@ int main()
         header.close();
     }
 
-    ofstream impl(name + ".cpp");
+    ofstream impl(path + name + ".cpp");
     if (impl)
     {
         write(impl,"#include \"" + name + ".hpp\"");

@@ -11,7 +11,6 @@
 #include "AudioManager.hpp"
 #include "DebugScreen.hpp"
 #include "Log.hpp"
-#include "Math.hpp"
 #include "ResourceHolder.hpp"
 #include "StateManager.hpp"
 #include "String.hpp"

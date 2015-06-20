@@ -17,8 +17,9 @@ class ActionTarget
 	public:
 	    typedef const thor::ActionContext<std::string>& Context;
 	    typedef std::function<void(Context context)> Callback;
+	    typedef std::shared_ptr<thor::ActionMap<std::string>> ActionMapPtr;
 
-		ActionTarget();
+		ActionTarget(ActionMapPtr map = nullptr);
 
 		void handleEvent(sf::Event const& event);
 		void update();
@@ -30,7 +31,7 @@ class ActionTarget
 		void unbind(std::string const& key);
 
 	protected:
-	    thor::ActionMap<std::string> mMap;
+	    ActionMapPtr mMap;
 	    thor::ActionMap<std::string>::CallbackSystem mSystem;
 	    std::map<std::string,thor::Connection> mConnections;
 };
