@@ -24,13 +24,23 @@ int main()
     cout << "Enter the path where you want the file to be created : " << endl;
     string path;
     getline(cin,path);
+    if (path.back() != '\'')
+    {
+        path += "\\";
+    }
     cout << "Enter the name of the State you want to create : " << endl;
     string name;
     cin >> name;
-    name += "State";
+    if (name.find("State") == std::string::npos)
+    {
+        name += "State";
+    }
     string nameMaj = name;
     transform(nameMaj.begin(), nameMaj.end(), nameMaj.begin(), my_toupper());
-    cout << nameMaj;
+
+    cout << endl << endl;
+    cout << " --- Writing Header ---" << endl;
+    cout << endl << endl;
 
     ofstream header(path + name + ".hpp");
     if (header)
@@ -59,11 +69,16 @@ int main()
         header.close();
     }
 
+    cout << endl << endl;
+    cout << " --- Header Done ---" << endl;
+    cout << endl << endl;
+    cout << " --- Writing Implementation ---" << endl;
+    cout << endl << endl;
+
     ofstream impl(path + name + ".cpp");
     if (impl)
     {
         write(impl,"#include \"" + name + ".hpp\"");
-        write(impl,"#include \"App.hpp\"");
         write(impl,"");
         write(impl,name + "::" + name + "(ah::StateManager& manager) : ah::State(manager)");
         write(impl,"{");
@@ -89,16 +104,24 @@ int main()
         write(impl,"{");
         write(impl,"    states.transform *= getTransform();");
         write(impl,"}");
+        write(impl,"");
 		write(impl,"void " + name + "::onActivate()");
         write(impl,"{");
         write(impl,"");
         write(impl,"}");
+        write(impl,"");
 		write(impl,"void " + name + "::onDeactivate()");
         write(impl,"{");
         write(impl,"");
         write(impl,"}");
         impl.close();
     }
+
+    cout << endl << endl;
+    cout << " --- Implementation Done ---" << endl;
+    cout << endl << endl;
+
+    getchar();
 
     return 0;
 }
