@@ -63,7 +63,8 @@ class Log
             return log;
         }
 
-    public:
+        void log(std::string const& message, LogType type = Log::Info);
+
         void useConsole(bool use);
         void setTimeFormat(std::string const& timeFormat);
 

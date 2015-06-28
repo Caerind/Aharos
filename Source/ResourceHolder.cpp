@@ -32,6 +32,31 @@ sf::Shader& ResourceHolder::getShader(std::string const& id)
     return mShaders.at(id);
 }
 
+bool ResourceHolder::isSoundBufferLoaded(std::string const& id) const
+{
+    return mSoundBuffers.find(id) != mSoundBuffers.end();
+}
+
+bool ResourceHolder::isFontLoaded(std::string const& id) const
+{
+    return mFonts.find(id) != mFonts.end();
+}
+
+bool ResourceHolder::isImageLoaded(std::string const& id) const
+{
+    return mImages.find(id) != mImages.end();
+}
+
+bool ResourceHolder::isTextureLoaded(std::string const& id) const
+{
+    return mTextures.find(id) != mTextures.end();
+}
+
+bool ResourceHolder::isShaderLoaded(std::string const& id) const
+{
+    return mShaders.find(id) != mShaders.end();
+}
+
 void ResourceHolder::releaseSoundBuffer(std::string const& id)
 {
     auto itr = mSoundBuffers.find(id);

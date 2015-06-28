@@ -20,6 +20,11 @@ bool Log::isLogOpen()
     return mFile.is_open();
 }
 
+void Log::log(std::string const& message, LogType type)
+{
+    *this << type << message;
+}
+
 void Log::useConsole(bool use)
 {
     mConsole = use;

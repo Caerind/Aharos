@@ -23,10 +23,10 @@ class DebugScreen : public sf::Drawable
         void showDebugScreen(bool show);
         bool isDebugScreenVisible();
 
-    public:
         void setFont(sf::Font& font);
         void setCharsize(std::size_t charsize);
 
+    protected:
         void update();
 
         void draw(sf::RenderTarget& target, sf::RenderStates states) const;

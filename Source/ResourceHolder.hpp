@@ -20,21 +20,27 @@ class ResourceHolder
         ResourceHolder();
 
         template<typename ... Args>
-        void loadSoundBuffer(std::string const& id, Args&& ... args);
+        bool loadSoundBuffer(std::string const& id, Args&& ... args);
         template<typename ... Args>
-        void loadFont(std::string const& id, Args&& ... args);
+        bool loadFont(std::string const& id, Args&& ... args);
         template<typename ... Args>
-        void loadImage(std::string const& id, Args&& ... args);
+        bool loadImage(std::string const& id, Args&& ... args);
         template<typename ... Args>
-        void loadTexture(std::string const& id, Args&& ... args);
+        bool loadTexture(std::string const& id, Args&& ... args);
         template<typename ... Args>
-        void loadShader(std::string const& id, Args&& ... args);
+        bool loadShader(std::string const& id, Args&& ... args);
 
         sf::SoundBuffer& getSoundBuffer(std::string const& id);
         sf::Font& getFont(std::string const& id);
         sf::Image& getImage(std::string const& id);
         sf::Texture& getTexture(std::string const& id);
         sf::Shader& getShader(std::string const& id);
+
+        bool isSoundBufferLoaded(std::string const& id) const;
+        bool isFontLoaded(std::string const& id) const;
+        bool isImageLoaded(std::string const& id) const;
+        bool isTextureLoaded(std::string const& id) const;
+        bool isShaderLoaded(std::string const& id) const;
 
         void releaseSoundBuffer(std::string const& id);
         void releaseFont(std::string const& id);
@@ -51,33 +57,43 @@ class ResourceHolder
 };
 
 template<typename ... Args>
-void ResourceHolder::loadSoundBuffer(std::string const& id, Args&& ... args)
+bool ResourceHolder::loadSoundBuffer(std::string const& id, Args&& ... args)
 {
-    assert(mSoundBuffers[id].loadFromFile(std::forward<Args>(args)...));
+    bool res = mSoundBuffers[id].loadFromFile(std::forward<Args>(args)...);
+    assert(res);
+    return res;
 }
 
 template<typename ... Args>
-void ResourceHolder::loadFont(std::string const& id, Args&& ... args)
+bool ResourceHolder::loadFont(std::string const& id, Args&& ... args)
 {
-    assert(mFonts[id].loadFromFile(std::forward<Args>(args)...));
+    bool res = mFonts[id].loadFromFile(std::forward<Args>(args)...);
+    assert(res);
+    return res;
 }
 
 template<typename ... Args>
-void ResourceHolder::loadImage(std::string const& id, Args&& ... args)
+bool ResourceHolder::loadImage(std::string const& id, Args&& ... args)
 {
-    assert(mImages[id].loadFromFile(std::forward<Args>(args)...));
+    bool res = mImages[id].loadFromFile(std::forward<Args>(args)...);
+    assert(res);
+    return res;
 }
 
 template<typename ... Args>
-void ResourceHolder::loadTexture(std::string const& id, Args&& ... args)
+bool ResourceHolder::loadTexture(std::string const& id, Args&& ... args)
 {
-    assert(mTextures[id].loadFromFile(std::forward<Args>(args)...));
+    bool res = mTextures[id].loadFromFile(std::forward<Args>(args)...);
+    assert(res);
+    return res;
 }
 
 template<typename ... Args>
-void ResourceHolder::loadShader(std::string const& id, Args&& ... args)
+bool ResourceHolder::loadShader(std::string const& id, Args&& ... args)
 {
-    assert(mShaders[id].loadFromFile(std::forward<Args>(args)...));
+    bool res = mShaders[id].loadFromFile(std::forward<Args>(args)...);
+    assert(res);
+    return res;
 }
 
 } // namespace ah

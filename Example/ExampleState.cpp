@@ -7,7 +7,6 @@ ExampleState::ExampleState(ah::StateManager& manager)
     mType = ExampleState::getID();
     mSprite.setTexture(getApplication().getTexture("cb"));
 	mExploded = false;
-    //getApplication().setAction("quit",thor::Action(sf::Event::Closed));
 	getApplication() << ah::Log::Info << "launched";
 }
 
@@ -18,11 +17,6 @@ std::string ExampleState::getID()
 
 bool ExampleState::handleEvent(sf::Event const& event)
 {
-    /*
-    Events can be handled via the thor::ActionMap in the Application
-    But an interface is still provided if you prefer not using thor::ActionMap
-    */
-
     return true;
 }
 
