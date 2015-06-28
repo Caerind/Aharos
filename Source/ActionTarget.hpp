@@ -26,6 +26,7 @@ class ActionTarget
 
 		void setAction(std::string const& key, thor::Action const& action);
 		const thor::Action& getAction(std::string const& key);
+		bool isActive(std::string const& key);
 
 		void bind(std::string const& key, Callback const& callback);
 		void unbind(std::string const& key);

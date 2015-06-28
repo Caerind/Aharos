@@ -63,7 +63,7 @@ class Log
             return log;
         }
 
-    protected:
+    public:
         void useConsole(bool use);
         void setTimeFormat(std::string const& timeFormat);
 

@@ -49,6 +49,14 @@ void Application::pushState(std::string const& stateId)
 
 Application::Application() : mStates(*this), mFpsFrames(0)
 {
+    setAction("ToggleDebugScreen",thor::Action(sf::Keyboard::F3,thor::Action::PressOnce));
+    bind("ToggleDebugScreen",[&](ActionTarget::Context context){showDebugScreen(!isDebugScreenVisible());});
+
+    setAction("CloseWindow",thor::Action(sf::Event::Closed));
+    bind("CloseWindow",[&](ActionTarget::Context context){context.window->close();});
+
+    setAction("TakeScreenShot",thor::Action(sf::Keyboard::F2,thor::Action::PressOnce));
+    bind("TakeScreenShot",[&](ActionTarget::Context context){screenshot(); *this << "Screenshot saved !"; });
 }
 
 Application::~Application()
@@ -71,12 +79,11 @@ void Application::update(sf::Time dt)
 
     ActionTarget::update();
 
-    mFpsTimer += dt;
     mFpsFrames++;
-    if (mFpsTimer >= sf::seconds(1.0f))
+    if (mFpsTimer.getElapsedTime() >= sf::seconds(1.0f))
     {
         DebugScreen::setDebugInfo("FPS",to_string(mFpsFrames));
-        mFpsTimer -= sf::seconds(1.0f);
+        mFpsTimer.restart();
         mFpsFrames = 0;
     }
 

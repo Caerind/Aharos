@@ -10,6 +10,7 @@ Window::Window()
     mVisible = true;
     mKeyRepeat = true;
     mCursorVisibility = MouseCursor::Default;
+    mScreenshotPath = "";
 }
 
 void Window::create(sf::VideoMode videoMode, std::string title, sf::Uint32 style)
@@ -176,6 +177,21 @@ void Window::setMouseCursorTextureRect(sf::IntRect rect)
 void Window::setMouseCursorOrigin(sf::Vector2f origin)
 {
     mCursor.setOrigin(origin);
+}
+
+void Window::screenshot()
+{
+    capture().saveToFile(mScreenshotPath + getTime("%Y-%m-%d_%H-%M-%S") + ".png");
+}
+
+void Window::setScreenshotPath(std::string const& screenshotPath)
+{
+    mScreenshotPath = screenshotPath;
+}
+
+std::string Window::getScreenshotPath() const
+{
+    return mScreenshotPath;
 }
 
 }

@@ -37,6 +37,11 @@ const thor::Action& ActionTarget::getAction(std::string const& key)
 	return (*mMap)[key];
 }
 
+bool ActionTarget::isActive(std::string const& key)
+{
+    return mMap->isActive(key);
+}
+
 void ActionTarget::bind(std::string const& key, Callback const& callback)
 {
 	mConnections[key] = mSystem.connect(key,callback);

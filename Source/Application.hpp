@@ -43,7 +43,7 @@ class Application : public Log, public ResourceHolder, public Window, public Deb
 
         StateManager mStates;
 
-        sf::Time mFpsTimer;
+        sf::Clock mFpsTimer;
         unsigned int mFpsFrames;
 };
 

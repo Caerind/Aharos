@@ -20,14 +20,9 @@ void DebugScreen::setDebugInfo(std::string const& id, std::string const& value)
     mValues[id].setString(id + " : " + value);
 }
 
-void DebugScreen::showDebugScreen()
+void DebugScreen::showDebugScreen(bool show)
 {
-    mShowDebugScreen = true;
-}
-
-void DebugScreen::hideDebugScreen()
-{
-    mShowDebugScreen = false;
+    mShowDebugScreen = show;
 }
 
 bool DebugScreen::isDebugScreenVisible()

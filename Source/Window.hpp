@@ -7,6 +7,8 @@
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Window/Window.hpp>
 
+#include "Clock.hpp"
+
 namespace ah
 {
 
@@ -37,9 +39,8 @@ class Window : public sf::RenderWindow
         void setKeyRepeatEnabled(bool enabled);
         bool isKeyRepeatEnabled();
 
-    protected: // Icon
+    public: // Icon
         void setIcon(std::string const& filename);
-
 
     public: // Mouse
         void setMousePosition2i(sf::Vector2i pos);
@@ -69,6 +70,11 @@ class Window : public sf::RenderWindow
         void setMouseCursorTextureRect(sf::IntRect rect);
         void setMouseCursorOrigin(sf::Vector2f origin);
 
+    public: // Screenshot
+        void screenshot();
+        void setScreenshotPath(std::string const& screenshotPath);
+        std::string getScreenshotPath() const;
+
     private:
         // Window
         sf::RenderWindow mWindow;
@@ -82,6 +88,9 @@ class Window : public sf::RenderWindow
         MouseCursor mCursorVisibility;
         sf::Sprite mCursor;
         sf::Texture mCursorTexture;
+
+        // Screenshot
+        std::string mScreenshotPath;
 };
 
 }
