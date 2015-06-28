@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "State.hpp"
+#include "Arrow.hpp"
 
 int main()
 {
@@ -18,7 +19,7 @@ int main()
     states.push_back(State("EntryPoint",font,sf::Vector2f(),1));
     states.push_back(State("EndPoint",font,sf::Vector2f(600,0),2));
 
-    std::vector<sf::VertexArray> lines;
+    std::vector<Arrow> arrows;
 
     int idSelectedMove;
     int idSelectedGoTo;
@@ -100,7 +101,7 @@ int main()
                 {
                     for (unsigned int i = 0; i < states.size(); i++)
                     {
-                        if (states[i].contains(mPos) && i != idSelectedGoTo)
+                        if (states[i].contains(mPos) && (int)i != idSelectedGoTo)
                         {
                             bool passed = false;
 
@@ -121,10 +122,11 @@ int main()
 
                             if (passed)
                             {
-                                sf::VertexArray line(sf::Lines,2);
-                                line[0].position = gotoPos1;
-                                line[1].position = mPos;
-                                lines.push_back(line);
+                                sf::Vector2f d1 = gotoPos1 - states[idSelectedGoTo].getPosition();
+                                sf::Vector2f d2 = mPos - states[i].getPosition();
+                                Arrow arrow(&states[idSelectedGoTo],d1,&states[i],d2);
+                                arrows.push_back(arrow);
+                                arrows.back().update();
                             }
                         }
                     }
@@ -151,6 +153,10 @@ int main()
         if (idSelectedMove >= 0 && idSelectedMove < (int)states.size())
         {
             states[idSelectedMove].setPosition(mPos - deltaPosition);
+            for (unsigned int i = 0; i < arrows.size(); i++)
+            {
+                arrows[i].update();
+            }
         }
 
         sf::Vector2f mvt;
@@ -170,9 +176,9 @@ int main()
         {
             window.draw(states[i]);
         }
-        for (unsigned int i = 0; i < lines.size(); i++)
+        for (unsigned int i = 0; i < arrows.size(); i++)
         {
-            window.draw(lines[i]);
+            window.draw(arrows[i]);
         }
         window.setView(window.getDefaultView());
 
