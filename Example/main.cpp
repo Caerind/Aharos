@@ -1,4 +1,4 @@
-#include "../Source/Application.hpp"
+#include "../Source/Application/Application.hpp"
 
 #include "ExampleState.hpp"
 
@@ -8,7 +8,7 @@ int main()
     ah::Application::instance().loadFont("aniron","aniron.ttf");
     ah::Application::instance().setFont(ah::Application::instance().getFont("aniron"));
     ah::Application::instance().showDebugScreen(true);
-	
+
 	// Load Log
 	ah::Application::instance().openLog("test.txt");
     ah::Application::instance().useConsole(true);
@@ -22,7 +22,7 @@ int main()
 
     // Register States
     ah::Application::instance().registerState<ExampleState>(ExampleState::getID());
-	
+
     // Run Application
     ah::Application::instance().pushState(ExampleState::getID());
     ah::Application::instance().run();

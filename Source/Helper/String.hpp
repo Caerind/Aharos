@@ -1,9 +1,9 @@
-#ifndef AH_STRING_HPP
-#define AH_STRING_HPP
+#ifndef LP_STRING_HPP
+#define LP_STRING_HPP
 
 #include <sstream>
 
-namespace ah
+namespace lp
 {
 
 template<typename T>
@@ -41,4 +41,4 @@ bool from_string(std::string const& str, T& dest)
 
 }
 
-#endif // AH_STRING_HPP
+#endif // LP_STRING_HPP

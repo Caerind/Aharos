@@ -1,5 +1,5 @@
 #include "ExampleState.hpp"
-#include "../Source/Application.hpp"
+#include "../Source/Application/Application.hpp"
 
 ExampleState::ExampleState(ah::StateManager& manager)
 : State(manager)

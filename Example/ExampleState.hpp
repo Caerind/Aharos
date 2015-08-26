@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics/Sprite.hpp>
 
-#include "../Source/State.hpp"
+#include "../Source/Application/State.hpp"
 
 class ExampleState : public ah::State
 {
