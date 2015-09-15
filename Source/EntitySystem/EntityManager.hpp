@@ -35,6 +35,7 @@ class EntityManager
 
     public:
         EntityManager();
+        ~EntityManager();
 
         EntityPtr create();
 

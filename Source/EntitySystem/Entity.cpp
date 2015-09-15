@@ -7,7 +7,12 @@ std::size_t Entity::gIdCounter = 0;
 
 Entity::Entity()
 {
-    mId = gIdCounter++;
+    mId = ++gIdCounter; // The first entity created will have id 1, so there will not be entity with id 0
+}
+
+Entity::~Entity()
+{
+    removeComponents();
 }
 
 bool Entity::hasComponent(std::string const& type) const
@@ -24,9 +29,11 @@ void Entity::removeComponents()
 {
     for (auto itr = mComponents.begin(); itr != mComponents.end(); itr++)
     {
+        itr->second->setParent(nullptr);
         delete itr->second;
         itr->second = nullptr;
     }
+    mComponents.clear();
     if (hasManager())
     {
         mManager->updateEntity(mId,EntityManager::UpdateEntity::RemoveComponents);

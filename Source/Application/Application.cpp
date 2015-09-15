@@ -82,7 +82,7 @@ void Application::update(sf::Time dt)
     mFpsFrames++;
     if (mFpsTimer.getElapsedTime() >= sf::seconds(1.0f))
     {
-        DebugScreen::setDebugInfo("FPS",to_string(mFpsFrames));
+        DebugScreen::setDebugInfo("FPS",lp::to_string(mFpsFrames));
         mFpsTimer.restart();
         mFpsFrames = 0;
     }

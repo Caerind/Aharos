@@ -9,7 +9,6 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
-#include <SFML/Graphics/Shape.hpp>
 
 namespace lp
 {
@@ -21,7 +20,7 @@ class CollisionShape : public sf::Drawable
 
         CollisionShape();
         CollisionShape(sf::FloatRect const& rect);
-		CollisionShape(sf::Shape const& shape);
+		CollisionShape(sf::ConvexShape const& shape);
 
         void setPointCount(unsigned int count);
         unsigned int getPointCount() const;
@@ -29,8 +28,12 @@ class CollisionShape : public sf::Drawable
         void setPoint(unsigned int id, sf::Vector2f pos);
         sf::Vector2f getPoint(unsigned int id) const;
 
-        bool intersect(CollisionShape::Ptr shape);
+        bool intersects(CollisionShape::Ptr shape);
+        bool intersects(CollisionShape shape);
         bool contains(sf::Vector2f point);
+
+        void move(sf::Vector2f const& movement);
+        void cancelLastMovement();
 
         void setPosition(sf::Vector2f position);
         sf::Vector2f getPosition() const;
@@ -40,6 +43,8 @@ class CollisionShape : public sf::Drawable
     protected:
         sf::Vector2f mPosition;
         std::vector<sf::Vector2f> mPoints;
+
+        sf::Vector2f mLastMovement;
 };
 
 } // namespace lp

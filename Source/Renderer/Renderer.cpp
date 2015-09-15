@@ -1,4 +1,5 @@
 #include "Renderer.hpp"
+#include "../../Aharos/Application/Application.hpp"
 
 namespace rd
 {
@@ -16,13 +17,8 @@ void Renderer::add(Renderable* renderable)
 
 void Renderer::remove(Renderable* renderable)
 {
-    for (std::size_t i = 0; i < mInstance.mRenderables.size(); i++)
-    {
-        if (mInstance.mRenderables[i] == renderable)
-        {
-            mInstance.mRenderables.erase(mInstance.mRenderables.begin() + i);
-        }
-    }
+    mInstance.mRenderables.erase(std::remove_if(mInstance.mRenderables.begin(),mInstance.mRenderables.end(),
+    [&](rd::Renderable* r){ return r == renderable || r == nullptr ;}),mInstance.mRenderables.end());
 }
 
 void Renderer::clear()
@@ -32,17 +28,24 @@ void Renderer::clear()
 
 void Renderer::render(sf::RenderTarget& target)
 {
+    mInstance.mRenderables.erase(std::remove_if(mInstance.mRenderables.begin(),mInstance.mRenderables.end(),
+    [](rd::Renderable* r){ return r == nullptr ;}),mInstance.mRenderables.end());
+
     std::sort(mInstance.mRenderables.begin(), mInstance.mRenderables.end(),
     [](Renderable* a, Renderable* b) -> bool
     {
-        if (a->getZ() == b->getZ())
+        if (a != nullptr && b != nullptr)
         {
-            return a->getPosition().y < b->getPosition().y;
+            if (a->getZ() == b->getZ())
+            {
+               return a->getPosition().y < b->getPosition().y;
+            }
+            else
+            {
+                return a->getZ() < b->getZ();
+            }
         }
-        else
-        {
-            return a->getZ() < b->getZ();
-        }
+        return true;
     });
 
     sf::View oldView = target.getView();

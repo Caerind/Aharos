@@ -21,6 +21,7 @@ class Component
         static std::string getId();
 
         Entity* getParent() const;
+        void setParent(Entity* parent);
         EntityManager* getManager() const;
         bool hasParent() const;
         bool hasManager() const;

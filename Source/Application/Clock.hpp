@@ -4,7 +4,7 @@
 #include <ctime>
 #include <string>
 
-#include "../Sfml-Helper/String.hpp"
+#include "../Helper/String.hpp"
 
 namespace ah
 {

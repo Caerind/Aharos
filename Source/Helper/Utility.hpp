@@ -24,21 +24,7 @@ sf::Vector2<T> getRectPosition(const sf::Rect<T>& r);
 template<typename T>
 sf::Vector2<T> getRectSize(const sf::Rect<T>& r);
 
-float distanceRectPoint(sf::FloatRect const& rect, sf::Vector2f const& point)
-{
-	float d = 1000000.f;
-	for (float i = 0.f; i < rect.width; i++)
-	{
-		d = std::min(d,lp::distance(point, sf::Vector2f(rect.left + i, rect.top)));
-		d = std::min(d,lp::distance(point, sf::Vector2f(rect.left + i, rect.top + rect.height)));
-	}
-	for (float i = 0.f; i < rect.height; i++)
-	{
-		d = std::min(d,lp::distance(point, sf::Vector2f(rect.left, rect.top + i)));
-		d = std::min(d,lp::distance(point, sf::Vector2f(rect.left + rect.width, rect.top + i)));
-	}
-	return d;
-}
+float distanceRectPoint(sf::FloatRect const& rect, sf::Vector2f const& point);
 
 template<typename T>
 std::array<sf::Vector2<T>,4> getPoint(const sf::Rect<T>& r);

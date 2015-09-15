@@ -29,7 +29,7 @@ bool CollisionManager::intersect(CollisionShape::Ptr shape)
         return false;
     for (unsigned int i = 0; i < mCollisions.size(); i++)
         if (mCollisions[i] != nullptr)
-            if (mCollisions[i]->intersect(shape))
+            if (mCollisions[i]->intersects(shape))
                 return true;
     return false;
 }
@@ -37,7 +37,7 @@ bool CollisionManager::intersect(CollisionShape::Ptr shape)
 bool CollisionManager::intersect(CollisionShape& shape)
 {
     for (unsigned int i = 0; i < mCollisions.size(); i++)
-        if (shape.intersect(mCollisions[i]))
+        if (shape.intersects(mCollisions[i]))
             return true;
     return false;
 }

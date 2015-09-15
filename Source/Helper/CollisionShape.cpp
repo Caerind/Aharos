@@ -16,7 +16,7 @@ CollisionShape::CollisionShape(sf::FloatRect const& rect)
     mPoints[3] = sf::Vector2f(-rect.width * 0.5f, rect.height * 0.5f);
 }
 
-CollisionShape::CollisionShape(sf::Shape const& shape)
+CollisionShape::CollisionShape(sf::ConvexShape const& shape)
 {
 	mPoints.resize(shape.getPointCount());
 	for (unsigned int i = 0; i < shape.getPointCount(); i++)
@@ -52,7 +52,7 @@ sf::Vector2f CollisionShape::getPoint(unsigned int id) const
     return sf::Vector2f(0,0);
 }
 
-bool CollisionShape::intersect(CollisionShape::Ptr shape)
+bool CollisionShape::intersects(CollisionShape::Ptr shape)
 {
     if (shape == nullptr)
         return false;
@@ -61,6 +61,17 @@ bool CollisionShape::intersect(CollisionShape::Ptr shape)
             return true;
     for (unsigned int i = 0; i < shape->getPointCount(); i++)
         if (contains(shape->getPoint(i) + shape->getPosition()))
+            return true;
+    return false;
+}
+
+bool CollisionShape::intersects(CollisionShape shape)
+{
+    for (unsigned int i = 0; i < getPointCount(); i++)
+        if (shape.contains(getPoint(i) + getPosition()))
+            return true;
+    for (unsigned int i = 0; i < shape.getPointCount(); i++)
+        if (contains(shape.getPoint(i) + shape.getPosition()))
             return true;
     return false;
 }
@@ -79,6 +90,18 @@ bool CollisionShape::contains(sf::Vector2f point)
             return false;
     }
     return true;
+}
+
+void CollisionShape::move(sf::Vector2f const& movement)
+{
+    mPosition += movement;
+    mLastMovement = movement;
+}
+
+void CollisionShape::cancelLastMovement()
+{
+    mPosition -= mLastMovement;
+    mLastMovement = sf::Vector2f();
 }
 
 void CollisionShape::setPosition(sf::Vector2f position)

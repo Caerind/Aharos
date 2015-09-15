@@ -19,6 +19,7 @@ class Entity
         typedef std::shared_ptr<Entity> Ptr;
 
         Entity();
+        ~Entity();
 
         template<typename T, typename ... Args>
         T& addComponent(Args&& ... args);

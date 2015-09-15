@@ -13,7 +13,7 @@
 #include "Log.hpp"
 #include "ResourceHolder.hpp"
 #include "StateManager.hpp"
-#include "../Sfml-Helper/String.hpp"
+#include "../Helper/String.hpp"
 #include "Window.hpp"
 
 namespace ah

@@ -16,32 +16,32 @@ std::string getTime(std::string timeFormat)
 
 int getHours()
 {
-    return from_string<int>(getTime("%H"));
+    return lp::from_string<int>(getTime("%H"));
 }
 
 int getMinutes()
 {
-    return from_string<int>(getTime("%M"));
+    return lp::from_string<int>(getTime("%M"));
 }
 
 int getSeconds()
 {
-    return from_string<int>(getTime("%S"));
+    return lp::from_string<int>(getTime("%S"));
 }
 
 int getDay()
 {
-    return from_string<int>(getTime("%d"));
+    return lp::from_string<int>(getTime("%d"));
 }
 
 int getMonth()
 {
-    return from_string<int>(getTime("%m"));
+    return lp::from_string<int>(getTime("%m"));
 }
 
 int getYear()
 {
-    return from_string<int>(getTime("%y"));
+    return lp::from_string<int>(getTime("%y"));
 }
 
 }

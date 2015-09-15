@@ -24,6 +24,11 @@ Entity* Component::getParent() const
     return mParent;
 }
 
+void Component::setParent(Entity* parent)
+{
+    mParent = parent;
+}
+
 EntityManager* Component::getManager() const
 {
     if (hasParent())

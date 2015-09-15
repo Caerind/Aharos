@@ -9,6 +9,11 @@ EntityManager::EntityManager()
 {
 }
 
+EntityManager::~EntityManager()
+{
+    removeAll();
+}
+
 Entity::Ptr EntityManager::create()
 {
     mEntities.push_back(std::make_shared<Entity>());
@@ -18,7 +23,7 @@ Entity::Ptr EntityManager::create()
 
 Entity::Ptr EntityManager::get(std::size_t id) const
 {
-    for (unsigned int i = 0; i < mEntities.size(); i++)
+    for (std::size_t i = 0; i < mEntities.size(); i++)
     {
         if (mEntities[i] != nullptr)
         {
@@ -34,7 +39,7 @@ Entity::Ptr EntityManager::get(std::size_t id) const
 EntityArray EntityManager::getByFilter(ComponentFilter const& filter) const
 {
     EntityArray array;
-    for (unsigned int i = 0; i < mEntities.size(); i++)
+    for (std::size_t i = 0; i < mEntities.size(); i++)
     {
         if (mEntities[i] != nullptr)
         {
@@ -59,7 +64,7 @@ void EntityManager::remove(EntityPtr e)
 
 void EntityManager::remove(std::size_t id)
 {
-    for (unsigned int i = 0; i < mEntities.size(); i++)
+    for (std::size_t i = 0; i < mEntities.size(); i++)
     {
         if (mEntities[i] != nullptr)
         {
@@ -73,21 +78,22 @@ void EntityManager::remove(std::size_t id)
 
 void EntityManager::removeAll()
 {
-    for (unsigned int i = 0; i < mEntities.size(); i++)
+    for (std::size_t i = 0; i < mEntities.size(); i++)
     {
         mEntitiesToRemove.push_back(mEntities[i]);
     }
+    update();
 }
 
 void EntityManager::update()
 {
-    for (unsigned int i = 0; i < mEntitiesToRemove.size(); i++)
+    for (std::size_t i = 0; i < mEntitiesToRemove.size(); i++)
     {
         for (auto itr = mSystems.begin(); itr != mSystems.end(); ++itr)
         {
             itr->second->remove(mEntitiesToRemove[i]);
         }
-        for (unsigned int j = 0; j < mEntities.size(); j++)
+        for (std::size_t j = 0; j < mEntities.size(); j++)
         {
             if (mEntities[j] == mEntitiesToRemove[i])
             {
@@ -131,7 +137,7 @@ void EntityManager::reset()
 
 void EntityManager::updateEntity(std::size_t id, UpdateEntity type)
 {
-    for (unsigned int i = 0; i < mEntities.size(); i++)
+    for (std::size_t i = 0; i < mEntities.size(); i++)
     {
         if (mEntities[i]->getId() == id)
         {
@@ -179,7 +185,7 @@ void EntityManager::updateEntity(std::size_t id, UpdateEntity type)
 
 void EntityManager::updateSystem(System* s, ComponentFilter const& filter)
 {
-    for (unsigned int i = 0; i < mEntities.size(); i++)
+    for (std::size_t i = 0; i < mEntities.size(); i++)
     {
         if (mEntities[i] != nullptr)
         {
