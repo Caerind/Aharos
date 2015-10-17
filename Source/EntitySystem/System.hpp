@@ -7,6 +7,7 @@
 #include "ComponentFilter.hpp"
 #include "Entity.hpp"
 #include "EntityManager.hpp"
+#include "TypeToString.hpp"
 
 namespace es
 {

@@ -83,8 +83,8 @@ class EntityManager
 template<typename T, typename ... Args>
 T& EntityManager::addSystem(Args&& ... args)
 {
-    mSystems[T::getId()] = new T(std::forward<Args>(args)...);
-    mSystems[T::getId()]->mManager = this;
+    mSystems[type_to_string<T>()] = new T(std::forward<Args>(args)...);
+    mSystems[type_to_string<T>()]->mManager = this;
     updateSystem(mSystems[type_to_string<T>()],mSystems[type_to_string<T>()]->getFilter());
     return getSystem<T>();
 }
