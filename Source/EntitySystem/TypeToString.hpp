@@ -45,10 +45,10 @@ std::string readable_name( const char* mangled_name ) { return mangled_name ; }
 namespace es
 {
 
-template < typename T > std::string type_to_string()
+template < typename T > std::string type()
 { return readable_name( typeid(T).name() ) ; }
 
-template < typename T > std::string type_to_string( const T& obj )
+template < typename T > std::string type( const T& obj )
 { return readable_name( typeid(obj).name() ) ; }
 
 } // namespace es

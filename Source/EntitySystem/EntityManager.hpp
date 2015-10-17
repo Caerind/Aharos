@@ -83,16 +83,16 @@ class EntityManager
 template<typename T, typename ... Args>
 T& EntityManager::addSystem(Args&& ... args)
 {
-    mSystems[type_to_string<T>()] = new T(std::forward<Args>(args)...);
-    mSystems[type_to_string<T>()]->mManager = this;
-    updateSystem(mSystems[type_to_string<T>()],mSystems[type_to_string<T>()]->getFilter());
+    mSystems[type<T>()] = new T(std::forward<Args>(args)...);
+    mSystems[type<T>()]->mManager = this;
+    updateSystem(mSystems[type<T>()],mSystems[type<T>()]->getFilter());
     return getSystem<T>();
 }
 
 template<typename T>
 bool EntityManager::hasSystem() const
 {
-    return mSystems.find(type_to_string<T>()) != mSystems.end();
+    return mSystems.find(type<T>()) != mSystems.end();
 }
 
 template<typename T>
@@ -114,7 +114,7 @@ T& EntityManager::getSystem()
 {
     assert(hasSystem<T>());
 
-    return static_cast<T&>(*mSystems[type_to_string<T>()]);
+    return static_cast<T&>(*mSystems[type<T>()]);
 }
 
 } // namespace es
