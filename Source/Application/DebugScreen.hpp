@@ -24,6 +24,7 @@ class DebugScreen : public sf::Drawable
         bool isDebugScreenVisible();
 
         void setFont(sf::Font& font);
+        void setColor(sf::Color color);
         void setCharsize(std::size_t charsize);
 
     protected:
@@ -33,6 +34,7 @@ class DebugScreen : public sf::Drawable
 
     private:
         std::shared_ptr<sf::Font> mFont;
+        sf::Color mColor;
         std::size_t mCharsize;
         bool mShowDebugScreen;
         std::map<std::string,sf::Text> mValues;
