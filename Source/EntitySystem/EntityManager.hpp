@@ -8,6 +8,7 @@
 
 #include "Component.hpp"
 #include "ComponentFilter.hpp"
+#include "TypeToString.hpp"
 
 namespace es
 {
@@ -84,14 +85,14 @@ T& EntityManager::addSystem(Args&& ... args)
 {
     mSystems[T::getId()] = new T(std::forward<Args>(args)...);
     mSystems[T::getId()]->mManager = this;
-    updateSystem(mSystems[T::getId()],mSystems[T::getId()]->getFilter());
+    updateSystem(mSystems[type_to_string<T>()],mSystems[type_to_string<T>()]->getFilter());
     return getSystem<T>();
 }
 
 template<typename T>
 bool EntityManager::hasSystem() const
 {
-    return mSystems.find(T::getId()) != mSystems.end();
+    return mSystems.find(type_to_string<T>()) != mSystems.end();
 }
 
 template<typename T>
@@ -113,7 +114,7 @@ T& EntityManager::getSystem()
 {
     assert(hasSystem<T>());
 
-    return static_cast<T&>(*mSystems[T::getId()]);
+    return static_cast<T&>(*mSystems[type_to_string<T>()]);
 }
 
 } // namespace es
