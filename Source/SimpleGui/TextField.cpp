@@ -117,6 +117,7 @@ void TextField::setString(std::string const& string)
         str += '|';
     }
     mText.setString(str);
+    updateText();
 }
 
 std::string TextField::getString()

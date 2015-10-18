@@ -5,14 +5,9 @@
 namespace ah
 {
 
-std::string State::getID()
-{
-    return "State";
-}
-
-State::State(StateManager& manager)
+State::State(StateManager& manager, std::string const& type)
 : mManager(manager)
-, mType(State::getID())
+, mType(type)
 {
 }
 

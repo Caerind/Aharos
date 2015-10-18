@@ -14,6 +14,7 @@
 #include "ResourceHolder.hpp"
 #include "StateManager.hpp"
 #include "../Helper/String.hpp"
+#include "../Helper/TypeToString.hpp"
 #include "Window.hpp"
 
 namespace ah
@@ -27,8 +28,10 @@ class Application : public Log, public ResourceHolder, public Window, public Deb
         void run();
 
         template <typename T>
-        void registerState(std::string const& stateId);
-        void pushState(std::string const& stateId);
+        void registerState();
+
+        template <typename T>
+        void pushState();
 
     private:
         Application();
@@ -48,11 +51,17 @@ class Application : public Log, public ResourceHolder, public Window, public Deb
 };
 
 template <typename T>
-void Application::registerState(std::string const& stateId)
+void Application::registerState()
 {
-    mStates.registerState<T>(stateId);
+    mStates.registerState<T>();
 }
 
+template <typename T>
+void Application::pushState()
+{
+    mStates.pushState<T>();
 }
+
+} // namespace ah
 
 #endif // AH_APPLICATION_HPP

@@ -9,6 +9,8 @@
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Event.hpp>
 
+#include "../Helper/TypeToString.hpp"
+
 namespace ah
 {
 
@@ -18,12 +20,10 @@ class StateManager;
 class State : public sf::Drawable, public sf::Transformable
 {
     public:
-        static std::string getID();
-
         typedef std::unique_ptr<State> Ptr;
 
     public:
-        State(StateManager& manager);
+        State(StateManager& manager, std::string const& type = "State");
         virtual ~State();
 
         virtual bool handleEvent(sf::Event const& event);

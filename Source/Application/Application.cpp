@@ -41,12 +41,6 @@ void Application::run()
 	}
 }
 
-void Application::pushState(std::string const& stateId)
-{
-    mStates.pushState(stateId);
-}
-
-
 Application::Application() : mStates(*this), mFpsFrames(0)
 {
     setAction("ToggleDebugScreen",thor::Action(sf::Keyboard::F3,thor::Action::PressOnce));
@@ -98,4 +92,4 @@ void Application::render()
     Window::display();
 }
 
-}
+} // namespace ah

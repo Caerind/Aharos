@@ -5,6 +5,8 @@
 #include <map>
 #include <vector>
 
+#include "../Helper/TypeToString.hpp"
+
 #include "State.hpp"
 
 namespace ah
@@ -18,12 +20,14 @@ class StateManager : public sf::Drawable
 		StateManager(Application& app);
 
 		template<typename T>
-		void registerState(std::string const& id);
+		void registerState();
 
         void handleEvent(sf::Event const& event);
 		void update(sf::Time dt);
 		void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
+        template <typename T>
+		void pushState();
 		void pushState(std::string const& id);
 		void popState();
 		void clearStates();
@@ -65,12 +69,18 @@ class StateManager : public sf::Drawable
 };
 
 template<typename T>
-void StateManager::registerState(std::string const& id)
+void StateManager::registerState()
 {
-	mFactories[id] = [this] ()
+	mFactories[lp::type<T>()] = [this] ()
 	{
 		return State::Ptr(new T(*this));
 	};
+}
+
+template <typename T>
+void StateManager::pushState()
+{
+	mPendingList.push_back(PendingChange(Push, lp::type<T>()));
 }
 
 }

@@ -49,7 +49,7 @@ void StateManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void StateManager::pushState(std::string const& id)
 {
-	mPendingList.push_back(PendingChange(Push, id));
+    mPendingList.push_back(PendingChange(Push,id));
 }
 
 void StateManager::popState()
@@ -140,5 +140,4 @@ State::Ptr StateManager::createState(std::string const& id)
 	return found->second();
 }
 
-
-}
+} // namespace ah
