@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<KeyBinding>
+	<Key id="down" key="S" type="0" />
+	<Key id="left" key="Q" type="0" />
+	<Key id="right" key="D" type="0" />
+	<Key id="up" key="Z" type="0" />
+</KeyBinding>
+<Audio>
+	<Global value="0" />
+	<Music value="100" />
+	<Sound value="100" />
+</Audio>
+<Window>
+	<VerticalSync value="true" />
+	<Fullscreen value="false" />
+	<Resolution value="800,600" />
+</Window>

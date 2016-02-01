@@ -4,7 +4,8 @@
 #include <memory>
 #include <string>
 
-#include <SFML/Graphics/Drawable.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/Transformable.hpp>
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Event.hpp>
@@ -14,10 +15,9 @@
 namespace ah
 {
 
-class Application;
 class StateManager;
 
-class State : public sf::Drawable, public sf::Transformable
+class State : public sf::Transformable
 {
     public:
         typedef std::unique_ptr<State> Ptr;
@@ -28,12 +28,10 @@ class State : public sf::Drawable, public sf::Transformable
 
         virtual bool handleEvent(sf::Event const& event);
         virtual bool update(sf::Time dt);
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+        virtual void render(sf::RenderTarget& target, sf::RenderStates states);
 
         std::string getType() const;
         bool isActiveState() const;
-
-        Application& getApplication();
 
         virtual void onActivate();
         virtual void onDeactivate();
@@ -48,6 +46,6 @@ class State : public sf::Drawable, public sf::Transformable
         std::string mType;
 };
 
-}
+} // namespace ah
 
 #endif // AH_STATE_HPP

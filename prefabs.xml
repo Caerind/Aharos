@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Prefab id="test">
+	<Body type="2" pos-x="10" pos-y="3" pos-z="0" angle="0" vel-x="0" vel-y="0" vel-a="5" damp="0" adamp="0" canSleep="true" awake="true" fixedRot="false" bullet="false" active="true" gScale="1" />
+	<Fixture name="fixture0" friction="0.2" restitution="0" density="1" isSensor="false" f-cBits="1" f-mBits="65535" f-gIndex="0" type="2" count="4" x0="2" y0="-2" x1="2" y1="2" x2="-2" y2="2" x3="-2" y3="-2" />
+	<Component id="ses::SpriteComponent" pos-x="0" pos-y="0" ori-x="64" ori-y="64" sca-x="1" sca-y="1" rot="0" img="icon" tL="0" tT="0" tW="128" tH="128" />
+</Prefab>
+<Prefab id="player">
+	<Body type="2" pos-x="3" pos-y="3" pos-z="0" angle="20" vel-x="0" vel-y="0" vel-a="2" damp="0" adamp="0" canSleep="true" awake="true" fixedRot="false" bullet="false" active="true" gScale="1" />
+	<Fixture name="fixture0" friction="0.2" restitution="0" density="1" isSensor="false" f-cBits="1" f-mBits="65535" f-gIndex="0" type="2" count="4" x0="2" y0="-2" x1="2" y1="2" x2="-2" y2="2" x3="-2" y3="-2" />
+	<Component id="ses::CameraComponent" size-x="800" size-y="600" />
+	<Component id="ses::SpriteComponent" pos-x="0" pos-y="0" ori-x="64" ori-y="64" sca-x="1" sca-y="1" rot="0" img="icon" tL="0" tT="0" tW="128" tH="128" />
+</Prefab>
+<Prefab id="layer">
+	<Body type="1" pos-x="0" pos-y="0" pos-z="10" angle="0" vel-x="0" vel-y="0" vel-a="0" damp="0" adamp="0" canSleep="true" awake="true" fixedRot="true" bullet="false" active="true" gScale="1" />
+	<Component id="ses::TileLayerComponent" texture="tiles" size-x="32" size-y="32" tsize-x="32" tsize-y="32" data="eNrtzaEBAAAIA6Dp/0f7hSsEMpNkyrbE7/f7/X6/3+/3+/3+z7/pAEKMB4U=" collisions="1,"/>
+</Prefab>

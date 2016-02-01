@@ -5,8 +5,9 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <time.h>
 
-#include "Clock.hpp"
+#include "../Helper/Time.hpp"
 
 namespace ah
 {
@@ -29,14 +30,14 @@ class Log
         friend Log& operator<<(Log& log, std::string const& message)
         {
             std::stringstream ss;
-            ss << getTime(log.mTimeFormat);
+            ss << lp::getTime("[%x][%X]");
             switch (log.mType)
             {
-                case Log::Error:
+                case Log::LogType::Error:
                     ss << "[ERROR] : ";
                     break;
 
-                case Log::Warning:
+                case Log::LogType::Warning:
                     ss << "[WARNING] : ";
                     break;
 
@@ -52,7 +53,7 @@ class Log
             if (log.mFile.is_open())
                 log.mFile << str << std::endl;
 
-            log.mType = Log::Info;
+            log.mType = Log::LogType::Info;
 
             return log;
         }
@@ -63,18 +64,14 @@ class Log
             return log;
         }
 
-        void log(std::string const& message, LogType type = Log::Info);
-
         void useConsole(bool use);
-        void setTimeFormat(std::string const& timeFormat);
 
-    private:
+    protected:
         std::ofstream mFile;
         bool mConsole;
-        std::string mTimeFormat;
         LogType mType;
 };
 
-}
+} // namespace ah
 
 #endif // AH_LOG_HPP

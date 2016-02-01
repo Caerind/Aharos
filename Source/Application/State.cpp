@@ -1,6 +1,5 @@
 #include "State.hpp"
 #include "StateManager.hpp"
-#include "Application.hpp"
 
 namespace ah
 {
@@ -25,7 +24,7 @@ bool State::update(sf::Time dt)
     return true;
 }
 
-void State::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void State::render(sf::RenderTarget& target, sf::RenderStates states)
 {
 }
 
@@ -39,19 +38,12 @@ bool State::isActiveState() const
     return mType == mManager.getActiveStateType();
 }
 
-Application& State::getApplication()
-{
-    return mManager.getApplication();
-}
-
 void State::onActivate()
 {
-
 }
 
 void State::onDeactivate()
 {
-
 }
 
 void State::requestPush(std::string const& id)
@@ -69,4 +61,4 @@ void State::requestClear()
     mManager.clearStates();
 }
 
-}
+} // namespace ah

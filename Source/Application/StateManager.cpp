@@ -1,13 +1,12 @@
 #include "StateManager.hpp"
 #include "State.hpp"
-#include "Application.hpp"
 
 #include <cassert>
 
 namespace ah
 {
 
-StateManager::StateManager(Application& app) : mApplication(app)
+StateManager::StateManager()
 {
 }
 
@@ -39,12 +38,12 @@ void StateManager::update(sf::Time dt)
     applyPendingChanges();
 }
 
-void StateManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void StateManager::render(sf::RenderTarget& target, sf::RenderStates states)
 {
-	for(auto itr = mStates.begin(); itr != mStates.end(); itr++)
-	{
-        target.draw(*(*itr));
-	}
+	for (auto itr = mStates.begin(); itr != mStates.end(); itr++)
+    {
+        (*itr)->render(target,states);
+    }
 }
 
 void StateManager::pushState(std::string const& id)
@@ -84,11 +83,6 @@ std::string StateManager::getActiveStateType() const
 std::string StateManager::getLastActiveStateType() const
 {
     return mLastActiveStateType;
-}
-
-Application& StateManager::getApplication()
-{
-    return mApplication;
 }
 
 void StateManager::applyPendingChanges()

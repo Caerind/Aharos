@@ -12,19 +12,17 @@
 namespace ah
 {
 
-class Application;
-
-class StateManager : public sf::Drawable
+class StateManager
 {
     public:
-		StateManager(Application& app);
+		StateManager();
 
 		template<typename T>
 		void registerState();
 
         void handleEvent(sf::Event const& event);
 		void update(sf::Time dt);
-		void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+		void render(sf::RenderTarget& target, sf::RenderStates states);
 
         template <typename T>
 		void pushState();
@@ -37,9 +35,7 @@ class StateManager : public sf::Drawable
 		std::string getActiveStateType() const;
 		std::string getLastActiveStateType() const;
 
-		Application& getApplication();
-
-	private:
+	protected:
 		enum Action
 		{
 			Push,
@@ -57,10 +53,8 @@ class StateManager : public sf::Drawable
 		void applyPendingChanges();
 		State::Ptr createState(std::string const& id);
 
-	private:
-        Application& mApplication;
-
-		std::string mLastActiveStateType;
+	protected:
+        std::string mLastActiveStateType;
 
 		std::vector<State::Ptr> mStates;
 		std::vector<PendingChange> mPendingList;
@@ -71,7 +65,8 @@ class StateManager : public sf::Drawable
 template<typename T>
 void StateManager::registerState()
 {
-	mFactories[lp::type<T>()] = [this] ()
+    std::string t = lp::type<T>();
+	mFactories[t] = [this] ()
 	{
 		return State::Ptr(new T(*this));
 	};
@@ -83,6 +78,6 @@ void StateManager::pushState()
 	mPendingList.push_back(PendingChange(Push, lp::type<T>()));
 }
 
-}
+} // namespace ah
 
 #endif // AH_STATEMANAGER_HPP

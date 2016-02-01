@@ -5,91 +5,104 @@ namespace ah
 
 Application Application::mInstance;
 
-Application& Application::instance()
-{
-    return mInstance;
-}
-
 void Application::run()
 {
     sf::Clock clock;
-    sf::Time timeSinceLastUpdate = sf::Time::Zero;
-    const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
-	while (isOpen())
-	{
-		sf::Time dt = clock.restart();
-		timeSinceLastUpdate += dt;
-		bool repaint = false;
+    sf::Time timeSinceLastUpdate;
+    sf::Time timePerFrame = sf::seconds(1/60.f);
+    sf::Clock fpsClock;
+    std::size_t fps = 0;
+    mInstance.mWindow.setDebugInfo("FPS","0");
+    while (mInstance.mWindow.isOpen())
+    {
+        timeSinceLastUpdate += clock.restart();
 
-		while (timeSinceLastUpdate > TimePerFrame)
-		{
-			timeSinceLastUpdate -= TimePerFrame;
+        while (timeSinceLastUpdate > timePerFrame)
+        {
+            timeSinceLastUpdate -= timePerFrame;
 
-			handleEvents();
-			update(TimePerFrame);
+            sf::Event event;
+            while (mInstance.mWindow.pollEvent(event))
+            {
+                mInstance.mStates.handleEvent(event);
 
-			if (mStates.empty())
-                close();
+                if (event.type == sf::Event::Closed)
+                {
+                    mInstance.mWindow.close();
+                }
+                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F3)
+                {
+                    mInstance.mWindow.showDebugInfo(!mInstance.mWindow.isDebugInfoVisible());
+                }
+                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F2)
+                {
+                    mInstance.mWindow.screenshot();
+                }
+            }
 
-			std::cout << std::flush;
+            mInstance.mStates.update(timePerFrame);
+            if (mInstance.mStates.empty())
+            {
+                mInstance.mWindow.close();
+            }
+            mInstance.mAudio.update();
+        }
 
-			repaint = true;
-		}
+        mInstance.mWindow.clear();
+        mInstance.mStates.render(mInstance.mWindow,sf::RenderStates());
+        mInstance.mWindow.display();
 
-        if (repaint)
-            render();
-	}
+        fps++;
+        if (fpsClock.getElapsedTime() >= sf::seconds(1.f))
+        {
+            mInstance.mWindow.setDebugInfo("FPS",std::to_string(fps));
+            fps = 0;
+            fpsClock.restart();
+        }
+    }
 }
 
-Application::Application() : mStates(*this), mFpsFrames(0)
+StateManager& Application::getStates()
 {
-    setAction("ToggleDebugScreen",thor::Action(sf::Keyboard::F3,thor::Action::PressOnce));
-    bind("ToggleDebugScreen",[&](ActionTarget::Context context){showDebugScreen(!isDebugScreenVisible());});
+    return mInstance.mStates;
+}
 
-    setAction("CloseWindow",thor::Action(sf::Event::Closed));
-    bind("CloseWindow",[&](ActionTarget::Context context){context.window->close();});
+Window& Application::getWindow()
+{
+    return mInstance.mWindow;
+}
 
-    setAction("TakeScreenShot",thor::Action(sf::Keyboard::F2,thor::Action::PressOnce));
-    bind("TakeScreenShot",[&](ActionTarget::Context context){screenshot(); *this << "Screenshot saved !"; });
+AudioManager& Application::getAudio()
+{
+    return mInstance.mAudio;
+}
+
+ResourceManager& Application::getResources()
+{
+    return mInstance.mResources;
+}
+
+LangManager& Application::getLang()
+{
+    return mInstance.mLang;
+}
+
+Log& Application::getLog()
+{
+    return mInstance.mLog;
+}
+
+lp::KeyBinding& Application::getBinding()
+{
+    return mInstance.mBinding;
+}
+
+Application::Application()
+{
 }
 
 Application::~Application()
 {
-}
-
-void Application::handleEvents()
-{
-    sf::Event event;
-    while (Window::pollEvent(event))
-    {
-        ActionTarget::handleEvent(event);
-        mStates.handleEvent(event);
-    }
-}
-
-void Application::update(sf::Time dt)
-{
-    mStates.update(dt);
-
-    ActionTarget::update();
-
-    mFpsFrames++;
-    if (mFpsTimer.getElapsedTime() >= sf::seconds(1.0f))
-    {
-        DebugScreen::setDebugInfo("FPS",lp::to_string(mFpsFrames));
-        mFpsTimer.restart();
-        mFpsFrames = 0;
-    }
-
-    am::AudioManager::update();
-}
-
-void Application::render()
-{
-    Window::clear();
-    Window::draw(mStates);
-    Window::draw(*this); // Draw DebugScreen
-    Window::display();
 }
 
 } // namespace ah

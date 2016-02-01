@@ -1,67 +1,49 @@
 #ifndef AH_APPLICATION_HPP
 #define AH_APPLICATION_HPP
 
-#include <string>
-#include <iostream>
-
-#include <SFML/System/Time.hpp>
-#include <SFML/System/Clock.hpp>
-
-#include "ActionTarget.hpp"
-#include "AudioManager.hpp"
-#include "DebugScreen.hpp"
-#include "Log.hpp"
-#include "ResourceHolder.hpp"
 #include "StateManager.hpp"
-#include "../Helper/String.hpp"
-#include "../Helper/TypeToString.hpp"
 #include "Window.hpp"
+#include "AudioManager.hpp"
+#include "ResourceManager.hpp"
+#include "LangManager.hpp"
+#include "Log.hpp"
+#include "../Helper/KeyBinding.hpp"
 
 namespace ah
 {
 
-class Application : public Log, public ResourceHolder, public Window, public DebugScreen, public am::AudioManager, public ActionTarget
+class Application
 {
     public:
         static Application& instance();
 
-        void run();
+        static void run();
 
-        template <typename T>
-        void registerState();
-
-        template <typename T>
-        void pushState();
+        static StateManager& getStates();
+        static Window& getWindow();
+        static AudioManager& getAudio();
+        static ResourceManager& getResources();
+        static LangManager& getLang();
+        static Log& getLog();
+        static lp::KeyBinding& getBinding();
 
     private:
         Application();
         ~Application();
 
-        void handleEvents();
-        void update(sf::Time dt);
-        void render();
-
-    private:
         static Application mInstance;
 
         StateManager mStates;
-
-        sf::Clock mFpsTimer;
-        unsigned int mFpsFrames;
+        Window mWindow;
+        AudioManager mAudio;
+        ResourceManager mResources;
+        LangManager mLang;
+        Log mLog;
+        lp::KeyBinding mBinding;
 };
 
-template <typename T>
-void Application::registerState()
-{
-    mStates.registerState<T>();
-}
-
-template <typename T>
-void Application::pushState()
-{
-    mStates.pushState<T>();
-}
-
 } // namespace ah
+
+#define ah_Log ah::Application::getLog()
 
 #endif // AH_APPLICATION_HPP
